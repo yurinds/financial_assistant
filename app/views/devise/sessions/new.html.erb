@@ -1,26 +1,44 @@
-<h2><%= t('.sign_in') %></h2>
+<div class="row justify-content-center">
+  <div class="col-sm-6">
+    <div class="card mt-2 border-dark mb-3">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="card-header">
+        <h2><%= t('.sign_in') %></h2>
+      </div>
+      <div class="card-body">
+        <%= form_with(model: resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+          <div class="form-group">
+            <%= label_tag('inputEmail', 'Email', class: 'font-weight-bold') %>
+            <%= f.email_field :email, autofocus: true, 
+                              autocomplete: "email", 
+                              class: "form-control", 
+                              id:"inputEmail", 
+                              placeholder:"Email" %>
+          </div>
+          <div class="form-group">
+            <%= label_tag('inputPassword', 'Пароль', class: 'font-weight-bold') %>
+            <% if @minimum_password_length %>
+              <em>(не менее <%= @minimum_password_length %> символов)</em>
+            <% end %>
+            <%= f.password_field :password, autocomplete: "current-password", 
+                                    class: "form-control", 
+                                    id: "inputPassword",
+                                    placeholder: "Пароль" %>
+          </div>
+          <% if devise_mapping.rememberable? %>
+            <div class="form-group form-check">
+              <%= f.check_box :remember_me, class: "form-check-input", id: "user_remember_me" %>
+              <%= f.label :remember_me, { class: 'form-check-label' } %>
+            </div>
+          <% end %>
+          <div class="actions">
+            <%= f.submit t('.sign_in'), class: 'btn btn-primary mb-2' %>
+          </div>
+        <% end %>
+        <%= render "devise/shared/links" %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit t('.sign_in') %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

@@ -10,10 +10,29 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+
+    <%# Шапка %>
+    <div class=container>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href=<%= root_path %>>Мой финансовый помощник</a>
+          </li>
+        </ul>
+        <a class="btn btn-outline-success my-2 my-sm-0" 
+           href=<%= new_user_registration_path %>
+           type="link">Регистрация
+        </a>
+      </div>
+    </nav>
+  </div>
+
+  <%# Тело сайта %>
+  <div class=container>
+    <%= bootstrap_flash %>
 
     <%= yield %>
+  </div>
 
-  </body>
+</body>
 </html>
