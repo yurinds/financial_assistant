@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2020_01_30_140801) do
     t.date "date"
     t.string "operation_type"
     t.string "description"
-    t.string "amount"
+    t.integer "amount"
     t.bigint "category_id"
     t.bigint "budget_id"
     t.datetime "created_at", null: false

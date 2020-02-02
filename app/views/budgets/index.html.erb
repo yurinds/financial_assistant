@@ -1,6 +1,18 @@
-<% @budget.each do |item|  %>
+<div class="card-deck mb-3 text-center mt-3">
+  <%= render partial: "budget", collection: @budgets %>
+</div>
 
-  <h1> <%= item.date_from %></h1>
-  <h1> <%= item.date_to %></h1>
-
-<%  end %>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col"><%= t('.date') %></th>
+      <th scope="col"><%= t('.operation_type') %></th>
+      <th scope="col"><%= t('.category') %></th>
+      <th scope="col"><%= t('.description') %></th>
+      <th scope="col"><%= t('.amount') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: "operations/operation", collection: @operations %>
+  </tbody>
+</table>

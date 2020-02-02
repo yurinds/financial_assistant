@@ -1,0 +1,13 @@
+<% operations = Operation.all_by_budget(budget) %>
+
+<div class="card mb-4">
+  <div class="card-header">
+    <h2 class="my-0 font-weight-normal"><%= budget %></h2>
+  </div>
+  <div class="card-body">
+    <ul class="list-unstyled mt-3 mb-4">
+      <li>Сумма доходов: <%= operations.sum_by_type('income') %> <%= t('currency.value') %> </li>
+      <li>Сумма расходов: <%= operations.sum_by_type('expense') %> <%= t('currency.value') %></li>
+    </ul>
+  </div>
+</div>

@@ -6,7 +6,7 @@ class CreateOperations < ActiveRecord::Migration[5.2]
       t.date :date
       t.string :operation_type
       t.string :description
-      t.string :amount
+      t.integer :amount
       t.references :category, foreign_key: true
       t.references :budget, foreign_key: true
 

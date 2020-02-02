@@ -19,10 +19,12 @@
             <a class="nav-link" href=<%= root_path %>>Мой финансовый помощник</a>
           </li>
         </ul>
-        <a class="btn btn-outline-success my-2 my-sm-0" 
-           href=<%= new_user_registration_path %>
-           type="link">Регистрация
-        </a>
+
+        <% if user_signed_in? %>
+          <%= link_to 'Выйти', destroy_user_session_path, class: 'btn btn-outline-danger my-2 my-sm-0', method: :delete %>
+        <% else %>
+          <%= link_to 'Регистрация', new_user_registration_path, class: 'btn btn-outline-success my-2 my-sm-0' %>
+        <% end %>
       </div>
     </nav>
   </div>
