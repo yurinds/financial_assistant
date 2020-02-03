@@ -7,7 +7,7 @@ class Budget < ApplicationRecord
   validates :date_from, presence: true
   validates :date_to, presence: true
 
-  scope :all_by_user, ->(current_user) { where(user: current_user) }
+  scope :all_by_user, ->(current_user) { where(user: current_user).includes(:operations) }
   # Ex:- scope :active, lambda {where(:active => true)}
 
   def current_month

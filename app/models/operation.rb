@@ -8,7 +8,7 @@ class Operation < ApplicationRecord
   validates :operation_type, presence: true
   validates :amount, presence: true
 
-  scope :all_by_budget, ->(budget) { where(budget: budget) }
+  scope :all_by_budget, ->(budget) { where(budget: budget).order(:date) }
   scope :sum_by_type, ->(type) { where(operation_type: type).sum(:amount) }
 
   def type

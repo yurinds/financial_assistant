@@ -16,3 +16,7 @@
     <%= render partial: "operations/operation", collection: @operations %>
   </tbody>
 </table>
+
+<%= render partial: "operations/form", locals: {budget: @current_budget, 
+                                                operation: @new_operation, 
+                                                categories: @categories} %>

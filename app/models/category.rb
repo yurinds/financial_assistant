@@ -6,6 +6,8 @@ class Category < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 20 }
 
+  scope :by_user, ->(user) { where(user: user) }
+
   def to_s
     name
   end
