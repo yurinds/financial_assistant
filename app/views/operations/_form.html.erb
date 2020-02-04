@@ -1,11 +1,11 @@
-    <%= form_with(model: [budget, operation], html: {name: 'addNewOperation'}) do |f| %>
+<%= form_with(model: [budget, operation], html: {name: 'addNewOperation'}) do |f| %>
   <%# Дата операции %>
   <div class="form-group">
     <%= label_tag('inputDate', t('.date'), class: 'font-weight-bold') %>
     <%= f.date_field :date, autofocus: true, 
                               class: "form-control", 
                               id:"inputDate", 
-                              placeholder:"Email" %>
+                              placeholder:t('.date') %>
   </div>
 
   <div class="form-row">

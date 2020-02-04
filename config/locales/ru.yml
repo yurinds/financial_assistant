@@ -34,6 +34,14 @@ ru:
       description: 'Описание'
       amount: 'Сумма'
 
+    new:
+      date_from: 'Дата начала периода'
+      send: 'Отправить'
+      head: 'Создание бюджета'
+
+    create:
+      created: 'Бюджет успешно создан!'
+
   currency:
     value: '₽'
 
