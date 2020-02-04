@@ -6,8 +6,8 @@
         <h2><%= t('.sign_in') %></h2>
       </div>
       <div class="card-body">
-        <%= form_with(model: resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <%= render "devise/shared/error_messages", resource: resource %>
+        <%= form_with(model: resource, as: resource_name, local: true, url: session_path(resource_name)) do |f| %>
+          <%= render "partials/error", resource: resource %>
 
           <div class="form-group">
             <%= label_tag('inputEmail', 'Email', class: 'font-weight-bold') %>

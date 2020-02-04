@@ -10,12 +10,10 @@ class BudgetsController < ApplicationController
 
   def create
     @budget = current_user.budgets.build(allowed_params)
-    @budget = Budget.new
+
     if @budget.save
       redirect_to @budget, notice: t('.created')
     else
-      flash[:error] = @budget.errors.full_messages
-
       respond_to do |format|
         format.js { render :new }
       end
