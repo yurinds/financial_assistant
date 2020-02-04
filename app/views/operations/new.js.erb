@@ -1,4 +1,8 @@
-$("#collapseExample .card-body").html("<%= escape_javascript(render partial: 'operations/form', 
+$(".alert.alert-danger.alert-dismissible").remove();
+
+$("#main-container").prepend("<%= j(render partial: 'partials/error', locals: {resource: @new_operation}) %>");
+
+$("#collapseExample .card-body").html("<%= j(render partial: 'operations/form', 
                                             locals: {budget: @budget, 
                                                     operation: @new_operation, 
                                                     categories: @categories}) %>");

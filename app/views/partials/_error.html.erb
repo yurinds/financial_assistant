@@ -2,7 +2,7 @@
 <% if errors.any? %>
   <div class="alert alert-danger alert-dismissible fade show mt-3">
     <div class="lead buffer-bottom">
-      <%= I18n.t(:error, count: errors.count) %>
+      <%= I18n.t(:form_errors, errors_count: I18n.t(:error, count: errors.count))   %>
     </div>
     <ul>
       <% errors.full_messages.each do |message| %>

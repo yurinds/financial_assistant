@@ -3,11 +3,9 @@
 class OperationsController < ApplicationController
   before_action :find_operation, only: %i[update destroy]
   before_action :find_budget, only: %i[create new]
+  before_action :set_dependencies, only: %i[create new]
 
   def new
-    @budgets = Budget.all_by_user(current_user)
-    @operations = Operation.all_by_budget(@budget)
-    @categories = Category.by_user(current_user)
     @new_operation = @budget.operations.build
 
     respond_to do |format|
@@ -16,15 +14,15 @@ class OperationsController < ApplicationController
   end
 
   def create
-    @operation = @budget.operations.build(allowed_params)
+    @new_operation = @budget.operations.build(allowed_params)
 
-    if @operation.save
+    if @new_operation.save
       flash[:success] = t('.success')
     else
-      flash[:error] = t('.error')
+      respond_to do |format|
+        format.js { render :new }
+      end
     end
-
-    redirect_to budgets_path # ! Заглушка.В дальнейшем, всё должно отрабатываться на одной странице
   end
 
   def update
@@ -48,6 +46,12 @@ class OperationsController < ApplicationController
   end
 
   private
+
+  def set_dependencies
+    @budgets = Budget.all_by_user(current_user)
+    @operations = Operation.all_by_budget(@budget)
+    @categories = Category.by_user(current_user)
+  end
 
   def find_operation
     @operation = Operation.find(params[:id])

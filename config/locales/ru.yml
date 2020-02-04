@@ -1,5 +1,6 @@
 ru:
   period_error: 'должна соответствовать периоду бюджета!'
+  form_errors: 'В результате проверки формы %{errors_count}'
 
   error:
     one: '%{count} ошибка'
