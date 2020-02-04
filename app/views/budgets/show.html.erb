@@ -1,22 +1,27 @@
+<%# Список бюджетов %>
 <div class="card-deck mb-3 text-center mt-3">
   <%= render partial: "budget", collection: @budgets, locals: {current_budget: @budget} %>
 </div>
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col"><%= t('.date') %></th>
-      <th scope="col"><%= t('.operation_type') %></th>
-      <th scope="col"><%= t('.category') %></th>
-      <th scope="col"><%= t('.description') %></th>
-      <th scope="col"><%= t('.amount') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <%= render partial: "operations/operation", collection: @operations %>
-  </tbody>
-</table>
+<%# Таблица всех операций %>
+<% unless @operations.empty? %>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"><%= t('.date') %></th>
+        <th scope="col"><%= t('.operation_type') %></th>
+        <th scope="col"><%= t('.category') %></th>
+        <th scope="col"><%= t('.description') %></th>
+        <th scope="col"><%= t('.amount') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: "operations/operation", collection: @operations %>
+    </tbody>
+  </table>
+<% end %>
 
+<%# Выпадающая форма с добавлением операции %>
 <div class="row">
   <div class="col-sm-6">
     <div class="accordion mt-3" id="accordionExample">
