@@ -7,7 +7,7 @@ class Budget < ApplicationRecord
   validates :date_from, presence: true
   validates :date_to, presence: true
 
-  scope :all_by_user, ->(current_user) { where(user: current_user).includes(:operations) }
+  scope :all_by_user, ->(current_user) { where(user: current_user).order(date_from: :desc).includes(:operations) }
   # Ex:- scope :active, lambda {where(:active => true)}
 
   def current_month
@@ -16,6 +16,11 @@ class Budget < ApplicationRecord
 
   def current_year
     date_from.year
+  end
+
+  def operations_amount(type)
+    operations = Operation.all_by_budget(self)
+    operations.sum_by_type(type)
   end
 
   def to_s

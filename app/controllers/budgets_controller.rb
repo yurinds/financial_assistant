@@ -13,7 +13,7 @@ class BudgetsController < ApplicationController
   def show
     @budget = Budget.find(params[:id])
     @budgets = Budget.all_by_user(current_user)
-    
+
     @operations = Operation.all_by_budget(@budget)
     @new_operation = @budget.operations.build
     @categories = Category.by_user(current_user)

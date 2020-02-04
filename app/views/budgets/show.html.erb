@@ -1,5 +1,5 @@
 <div class="card-deck mb-3 text-center mt-3">
-  <%= render partial: "budget", collection: @budgets %>
+  <%= render partial: "budget", collection: @budgets, locals: {current_budget: @budget} %>
 </div>
 
 <table class="table">
