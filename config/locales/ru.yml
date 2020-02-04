@@ -25,6 +25,9 @@ ru:
 
   budgets:
     index:
+
+    show:
+      btn_new_operation: 'Добавить операцию'
       date: 'Дата'
       operation_type: 'Тип'
       category: 'Категория'

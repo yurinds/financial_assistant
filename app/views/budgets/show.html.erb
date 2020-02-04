@@ -1,1 +1,35 @@
+<div class="card-deck mb-3 text-center mt-3">
+  <%= render partial: "budget", collection: @budgets %>
+</div>
 
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col"><%= t('.date') %></th>
+      <th scope="col"><%= t('.operation_type') %></th>
+      <th scope="col"><%= t('.category') %></th>
+      <th scope="col"><%= t('.description') %></th>
+      <th scope="col"><%= t('.amount') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render partial: "operations/operation", collection: @operations %>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="accordion mt-3" id="accordionExample">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <%= link_to t('.btn_new_operation'), new_budget_operation_path(@budget, @new_operation), 
+                remote: true, class: "btn btn-link", 
+                data: {toggle: "collapse", target: "#collapseExample" }, 
+                aria: {expanded: "false", controls: "collapseExample"} %>
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

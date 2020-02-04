@@ -2,7 +2,18 @@
 
 class OperationsController < ApplicationController
   before_action :find_operation, only: %i[update destroy]
-  before_action :find_budget, only: %i[create]
+  before_action :find_budget, only: %i[create new]
+
+  def new
+    @budgets = Budget.all_by_user(current_user)
+    @operations = Operation.all_by_budget(@budget)
+    @categories = Category.by_user(current_user)
+    @new_operation = @budget.operations.build
+
+    respond_to do |format|
+      format.js {}
+    end
+  end
 
   def create
     @operation = @budget.operations.build(allowed_params)

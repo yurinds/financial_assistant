@@ -5,9 +5,17 @@ class BudgetsController < ApplicationController
 
   def index
     @budgets = Budget.all_by_user(current_user)
-    @current_budget = @budgets.first || current_user.budgets.build
-    @operations = Operation.all_by_budget(@current_budget)
-    @new_operation = @current_budget.operations.build
+    @current_budget = @budgets.first
+
+    redirect_to @current_budget if @current_budget
+  end
+
+  def show
+    @budget = Budget.find(params[:id])
+    @budgets = Budget.all_by_user(current_user)
+    
+    @operations = Operation.all_by_budget(@budget)
+    @new_operation = @budget.operations.build
     @categories = Category.by_user(current_user)
   end
 end

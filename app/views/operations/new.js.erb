@@ -1,0 +1,6 @@
+$("#collapseExample .card-body").html("<%= escape_javascript(render partial: 'operations/form', 
+                                            locals: {budget: @budget, 
+                                                    operation: @new_operation, 
+                                                    categories: @categories}) %>");
+
+$("#collapseExample").collapse('show');
