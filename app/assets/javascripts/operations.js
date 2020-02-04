@@ -4,6 +4,9 @@ document.addEventListener('turbolinks:load', e => {
   const btnAddOperation = document.querySelector(
     '.btn.btn-link[data-toggle="collapse"]'
   );
+
+  if (!btnAddOperation) return;
+
   btnAddOperation.addEventListener('ajax:before', event => {
     if (document.forms['addNewOperation']) event.preventDefault();
   });

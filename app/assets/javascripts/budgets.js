@@ -4,6 +4,8 @@
 document.addEventListener('turbolinks:load', _ => {
   const cardDesk = document.querySelector('.card-deck');
 
+  if (!cardDesk) return;
+
   cardDesk.addEventListener('click', event => {
     parentElement = event.target.closest('[data-url]');
 
