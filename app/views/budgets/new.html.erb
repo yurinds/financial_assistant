@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row justify-content-center">
   <div class="col-sm-6">
     <div class="card mt-3">
       <div class="card-header">
@@ -10,12 +10,11 @@
         <%= form_with(model: @new_budget) do |f| %>
           <%# Дата операции %>
           <div class="form-group">
-            <%= label_tag('inputDate', t('.date_from'), class: 'font-weight-bold') %>
-            <%= f.date_field :date_from, autofocus: true, 
+            <%= label_tag('inputDate', t('.date'), class: 'font-weight-bold') %>
+            <%= f.text_field :date, autofocus: true, 
                               class: "form-control", 
-                              id:"inputDate" %>
+                              id:"monthpicker" %>
           </div>
-
           <%# Отправка формы %>
           <div class="actions">
             <%= f.submit t('.send'), class: 'btn btn-primary mb-2' %>

@@ -21,6 +21,7 @@
         </ul>
 
         <% if user_signed_in? %>
+          <%= link_to 'Создать бюджет', new_budget_path, class: 'btn btn-outline-warning my-2 my-sm-0 ml-2' %>
           <%= link_to 'Категории', categories_path, class: 'btn btn-outline-info my-2 my-sm-0 ml-2' %>
           <%= link_to 'Выйти', destroy_user_session_path, class: 'btn btn-outline-danger my-2 my-sm-0 ml-2', method: :delete %>
         <% else %>
