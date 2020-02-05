@@ -1,0 +1,34 @@
+<div class="card mt-3 card-form">
+  <div class="card-header">
+
+    <% if @category.persisted? %>
+      <span class="d-flex">
+        <h3><%= t('.edit_category') %></h3>
+        <%=link_to fa_icon('window-close'), new_category_path, remote: true, class: "ml-auto align-self-center" %>
+      </span>
+    <% else %>
+      <h3><%= t('.new_category') %></h3>
+
+    <% end %>
+
+  </div>
+
+  <div class="card-body">
+
+    <%= form_with(model: @category) do |f| %>
+      <%# Дата операции %>
+      <div class="form-group">
+        <%= label_tag('inputName', t('.name'), class: 'font-weight-bold') %>
+        <%= f.text_field :name, autofocus: true, 
+                              class: "form-control", 
+                              id:"inputName" %>
+      </div>
+
+      <%# Отправка формы %>
+      <div class="actions">
+        <%= f.submit t('.send'), class: 'btn btn-primary mb-2' %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

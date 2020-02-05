@@ -5,8 +5,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users, only: %i[show edit update]
+  resources :categories, except: %i[show]
 
-  resources :budgets, only: %i[index show new create] do
-    resources :operations, only: %i[index create destroy new]
+  resources :budgets, except: %i[edit update destroy] do
+    resources :operations, only: %i[index new create destroy]
   end
 end

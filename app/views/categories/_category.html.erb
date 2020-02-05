@@ -1,0 +1,10 @@
+<tr>
+  <td class="d-flex align-self-center" scope="row">
+    <%= category.name %>
+
+    <span class="ml-auto">
+      <%=link_to fa_icon('edit'), edit_category_path(category), remote: true %>
+      <%=link_to fa_icon('trash-o'), category_path(category), remote: true, method: :delete, class: "ml-1" %>
+    </span>
+  </td>
+</tr>

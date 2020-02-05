@@ -12,6 +12,7 @@ class Operation < ApplicationRecord
 
   scope :all_by_budget, ->(budget) { where(budget: budget).order(:date) }
   scope :sum_by_type, ->(type) { where(operation_type: type).sum(:amount) }
+  scope :count_by_category, ->(category) { where(category: category).count }
 
   def type
     # Тип операции может быть :income или :expense

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class BudgetsController < ApplicationController
-  before_action :authenticate_user!
   before_action :find_budgets_by_user, only: %i[index show]
 
   def new

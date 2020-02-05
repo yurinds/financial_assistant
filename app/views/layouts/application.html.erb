@@ -21,7 +21,8 @@
         </ul>
 
         <% if user_signed_in? %>
-          <%= link_to 'Выйти', destroy_user_session_path, class: 'btn btn-outline-danger my-2 my-sm-0', method: :delete %>
+          <%= link_to 'Категории', categories_path, class: 'btn btn-outline-info my-2 my-sm-0 ml-2' %>
+          <%= link_to 'Выйти', destroy_user_session_path, class: 'btn btn-outline-danger my-2 my-sm-0 ml-2', method: :delete %>
         <% else %>
           <%= link_to 'Регистрация', new_user_registration_path, class: 'btn btn-outline-success my-2 my-sm-0' %>
         <% end %>
