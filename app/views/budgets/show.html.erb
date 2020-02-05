@@ -3,28 +3,30 @@
   <%= render partial: "budget", collection: @budgets, locals: {current_budget: @budget} %>
 </div>
 
-<%# Таблица всех операций %>
-<% unless @operations.empty? %>
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col"><%= t('.date') %></th>
-        <th scope="col"><%= t('.operation_type') %></th>
-        <th scope="col"><%= t('.category') %></th>
-        <th scope="col"><%= t('.description') %></th>
-        <th scope="col"><%= t('.amount') %></th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render partial: "operations/operation", collection: @operations %>
-    </tbody>
-  </table>
-<% end %>
+<div class="row align-items-start">
 
-<%# Выпадающая форма с добавлением операции %>
-<div class="row">
-  <div class="col-sm-6">
-    <div class="accordion mt-3" id="accordionExample">
+  <%# Таблица всех операций %>
+  <div class="col-sm-9">
+    <% unless @operations.empty? %>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col"><%= t('.date') %></th>
+            <th scope="col"><%= t('.category') %></th>
+            <th scope="col"><%= t('.description') %></th>
+            <th scope="col"><%= t('.amount') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: "operations/operation", collection: @operations %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+
+  <%# Выпадающая форма с добавлением операции %>
+  <div class="col-sm-3">
+    <div class="accordion" id="accordionExample">
       <div class="card">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
@@ -37,4 +39,5 @@
       </div>
     </div>
   </div>
+
 </div>

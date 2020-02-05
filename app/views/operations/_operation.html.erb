@@ -1,7 +1,17 @@
+<% symbol = "-" if operation.operation_type == 'expense' %>
+<% symbol = "+" if operation.operation_type == 'income' %>
+<% column_amount_class = "text-danger" if operation.operation_type == 'expense' %>
+<% column_amount_class = "text-success" if operation.operation_type == 'income' %>
+
 <tr>
   <td scope="row"><%= l(operation.date, format: :default) %></td>
-  <td><%= operation.type %></td>
   <td><%= operation.category %></td>
   <td><%= operation.description %></td>
-  <td><%= operation.amount %></td>
+  <td>
+    <span class="<%= column_amount_class %>">
+      <%=   %>
+      <%= symbol %>
+      <%= operation.amount %>
+    </span>
+  </td>
 </tr>
