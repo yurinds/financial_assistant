@@ -20,6 +20,9 @@ ru:
     11: 'Ноябрь'
     12: 'Декабрь'
 
+  currency:
+    value: '₽'
+
   operation:
     income: 'Приход'
     expense: 'Расход'
@@ -43,9 +46,14 @@ ru:
 
     create:
       created: 'Бюджет успешно создан!'
+      error: 'Ошибка при создании бюджета!'
 
-  currency:
-    value: '₽'
+    destroy:
+      success: 'Бюджет успешно удален!'
+      error: 'Ошибка при удалении бюджета!'
+
+  budget:
+    dependencies_error: 'По данному бюджету существуют операции! Удаление невозможно!'
 
   operations:
     form:

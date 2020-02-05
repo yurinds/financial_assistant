@@ -1,9 +1,14 @@
 <div class="card mb-4 pointer <%= "border border-success shadow" if budget == current_budget  %>" 
                                 data-url="<%= budget_path(budget) %>">
   <div class="card-header">
-    <h2 class="my-0 font-weight-normal">
-      <%= link_to budget, budget_path(budget)%>
-    </h2>
+
+    <span class="d-flex">
+      <h2 class="my-0 font-weight-normal">
+        <%= link_to budget, budget_path(budget)%>
+      </h2>
+      <%= link_to fa_icon('trash-o 2x'), budget_path(budget), remote: true, method: :delete, class: "ml-1 ml-auto align-self-center" %>
+    </span>
+
   </div>
   <div class="card-body">
     <ul class="list-unstyled mt-3 mb-4">

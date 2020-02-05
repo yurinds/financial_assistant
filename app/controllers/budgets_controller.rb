@@ -2,6 +2,7 @@
 
 class BudgetsController < ApplicationController
   before_action :find_budgets_by_user, only: %i[index show]
+  before_action :find_budget, only: %i[destroy show]
 
   def new
     @new_budget = current_user.budgets.build
@@ -14,7 +15,7 @@ class BudgetsController < ApplicationController
       redirect_to @budget, notice: t('.created')
     else
       respond_to do |format|
-        format.js { render :new }
+        format.js { render :flash }
       end
     end
   end
@@ -30,17 +31,29 @@ class BudgetsController < ApplicationController
   end
 
   def show
-    @budget = Budget.find(params[:id])
-
     @operations = Operation.all_by_budget(@budget)
     @new_operation = @budget.operations.build
     @categories = Category.by_user(current_user)
+  end
+
+  def destroy
+    if @budget.destroy
+      redirect_to budgets_path, notice: t('.success')
+    else
+      respond_to do |format|
+        format.js { render :flash }
+      end
+    end
   end
 
   private
 
   def find_budgets_by_user
     @budgets = Budget.all_by_user(current_user)
+  end
+
+  def find_budget
+    @budget = Budget.find(params[:id])
   end
 
   def allowed_params

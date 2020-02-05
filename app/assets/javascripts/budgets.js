@@ -25,6 +25,7 @@ document.addEventListener('turbolinks:load', _ => {
   if (!cardDesk) return;
 
   cardDesk.addEventListener('click', event => {
+    if (event.target.nodeName === 'I') return;
     parentElement = event.target.closest('[data-url]');
 
     if (!parentElement) return;

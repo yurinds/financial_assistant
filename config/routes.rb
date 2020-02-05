@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[show edit update]
   resources :categories, except: %i[show]
 
-  resources :budgets, except: %i[edit update destroy] do
+  resources :budgets, except: %i[edit update] do
     resources :operations, only: %i[index new create destroy]
   end
 end

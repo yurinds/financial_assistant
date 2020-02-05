@@ -9,6 +9,8 @@ class Budget < ApplicationRecord
 
   before_validation :set_period
 
+  before_destroy :check_for_dependent_operations
+
   scope :all_by_user, ->(current_user) { where(user: current_user).order(date_from: :desc).includes(:operations) }
 
   attr_accessor :date
@@ -31,6 +33,14 @@ class Budget < ApplicationRecord
   end
 
   private
+
+  def check_for_dependent_operations
+    return true if Operation.count_by_budget(self) == 0
+
+    errors[:base] << I18n.t('.budget.dependencies_error')
+
+    throw :abort
+  end
 
   def set_period
     return if date.empty?
