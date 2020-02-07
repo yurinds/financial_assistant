@@ -1,10 +1,8 @@
-$(".alert.alert-danger.alert-dismissible").remove();
-
-$("#main-container").prepend("<%= j(render partial: 'partials/error', locals: {resource: @new_operation}) %>");
+<%= render partial: 'flash', object: @operation, as: 'resource' %>
 
 $("#collapseExample .card-body").html("<%= j(render partial: 'operations/form', 
                                             locals: {budget: @budget, 
-                                                    operation: @new_operation, 
+                                                    operation: @operation, 
                                                     categories: @categories}) %>");
 
 $("#collapseExample").collapse('show');

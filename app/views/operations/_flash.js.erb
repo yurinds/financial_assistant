@@ -1,0 +1,3 @@
+$(".alert.alert-danger.alert-dismissible").remove();
+
+$("#main-container").prepend("<%= j(render partial: 'partials/error', locals: {resource: resource}) %>");

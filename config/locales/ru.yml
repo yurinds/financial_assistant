@@ -63,6 +63,7 @@ ru:
       description: 'Описание'
       amount: 'Сумма'
       send: 'Отправить'
+      close: 'Отменить'
 
     create:
       success: 'Операция успешно добавлена!'

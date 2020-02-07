@@ -1,51 +1,57 @@
 # frozen_string_literal: true
 
 class OperationsController < ApplicationController
-  before_action :find_operation, only: %i[update destroy]
-  before_action :find_budget, only: %i[create new]
-  before_action :set_dependencies, only: %i[create new]
+  before_action :find_operation, only: %i[edit update destroy]
+  before_action :find_budget
+  before_action :set_dependencies, only: %i[create update new edit]
 
   def new
-    @new_operation = @budget.operations.build
+    @operation = @budget.operations.build
 
     respond_to do |format|
-      format.js {}
+      format.js { render :new }
+    end
+  end
+
+  def edit
+    respond_to do |format|
+      format.js { render :new }
     end
   end
 
   def create
-    @new_operation = @budget.operations.build(allowed_params)
+    @operation = @budget.operations.build(allowed_params)
 
-    if @new_operation.save
-      flash[:success] = t('.success')
+    if @operation.save
+      redirect_to @budget, notice: t('.success')
     else
-      respond_to do |format|
-        format.js { render :new }
-      end
+      render_error_messages_by_js
     end
   end
 
   def update
     if @operation.update_attributes(allowed_params)
-      flash[:success] = t('.success')
+      redirect_to @budget, notice: t('.success')
     else
-      flash[:error] = t('.error')
+      render_error_messages_by_js
     end
-
-    redirect_to budgets_path # ! Заглушка.В дальнейшем, всё должно отрабатываться на одной странице
   end
 
   def destroy
     if @operation.destroy
-      flash[:success] = t('.success')
+      redirect_to @budget, notice: t('.success')
     else
-      flash[:error] = t('.error')
+      render_error_messages_by_js
     end
-
-    redirect_to budgets_path # ! Заглушка.В дальнейшем, всё должно отрабатываться на одной странице
   end
 
   private
+
+  def render_error_messages_by_js
+    respond_to do |format|
+      format.js { render partial: 'operations/flash', object: @operation, as: 'resource' }
+    end
+  end
 
   def set_dependencies
     @budgets = Budget.all_by_user(current_user)

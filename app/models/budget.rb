@@ -53,6 +53,9 @@ class Budget < ApplicationRecord
     self.date_to = new_date.end_of_month
   end
 
+  # Метод для безопасного создания даты.
+  # По идее, здесь ему не место. Пока не
+  # знаю куда его лучше перенести.
   def save_parse_date
     Date.parse(date)
   rescue ArgumentError

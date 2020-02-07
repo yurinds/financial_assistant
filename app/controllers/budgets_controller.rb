@@ -32,7 +32,7 @@ class BudgetsController < ApplicationController
 
   def show
     @operations = Operation.all_by_budget(@budget)
-    @new_operation = @budget.operations.build
+    @operation = @budget.operations.build
     @categories = Category.by_user(current_user)
   end
 

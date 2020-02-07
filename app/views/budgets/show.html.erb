@@ -6,7 +6,7 @@
 <div class="row align-items-start">
 
   <%# Таблица всех операций %>
-  <div class="col-sm-9">
+  <div class="col-sm-8">
     <% unless @operations.empty? %>
       <table class="table">
         <thead class="thead-dark">
@@ -18,19 +18,19 @@
           </tr>
         </thead>
         <tbody>
-          <%= render partial: "operations/operation", collection: @operations %>
+          <%= render partial: "operations/operation", collection: @operations, locals: { budget: @budget } %>
         </tbody>
       </table>
     <% end %>
   </div>
 
   <%# Выпадающая форма с добавлением операции %>
-  <div class="col-sm-3">
+  <div class="col-sm-4">
     <div class="accordion" id="accordionExample">
       <div class="card">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
-            <%= link_to t('.btn_new_operation'), new_budget_operation_path(@budget, @new_operation), 
+            <%= link_to t('.btn_new_operation'), new_budget_operation_path(@budget, @operation), 
                 remote: true, class: "btn btn-link", 
                 data: {toggle: "collapse", target: "#collapseExample" }, 
                 aria: {expanded: "false", controls: "collapseExample"} %>

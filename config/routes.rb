@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   resources :categories, except: %i[show]
 
   resources :budgets, except: %i[edit update] do
-    resources :operations, only: %i[index new create destroy]
+    resources :operations, except: %i[show index]
   end
 end

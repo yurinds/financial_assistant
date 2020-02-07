@@ -4,18 +4,32 @@ document.addEventListener('turbolinks:load', e => {
   const btnAddOperation = document.querySelector(
     '.btn.btn-link[data-toggle="collapse"]'
   );
+  const operationsTable = document.querySelector('tbody');
 
+  if (!operationsTable) return;
   if (!btnAddOperation) return;
 
   btnAddOperation.addEventListener('ajax:before', event => {
-    if (document.forms['addNewOperation']) event.preventDefault();
+    if (document.forms['operationForm']) event.preventDefault();
   });
 
-  btnAddOperation.addEventListener('click', event => {
-    if (document.getElementById('collapseExample')) return;
-    template = createCollapseTemplate();
-    btnAddOperation.insertAdjacentHTML('afterend', template);
+  btnAddOperation.addEventListener('click', createOperationsForm);
+  operationsTable.addEventListener('click', ({ target }) => {
+    if (!target.nodeName === 'I') return;
+
+    createOperationsForm();
   });
+
+  function createOperationsForm(event) {
+    if (document.getElementById('collapseExample')) return;
+
+    const card = document.querySelector('#accordionExample .card');
+
+    if (!card) return;
+
+    template = createCollapseTemplate();
+    card.insertAdjacentHTML('beforeend', template);
+  }
 });
 
 function createCollapseTemplate() {
