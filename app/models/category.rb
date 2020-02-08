@@ -4,7 +4,7 @@ class Category < ApplicationRecord
   belongs_to :user
   has_many :operations
 
-  validates :name, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 20 }
+  validates :name, presence: true, uniqueness: { case_sensitive: false, scope: :user_id }, length: { maximum: 20 }
 
   before_destroy :check_for_dependent_operations
 

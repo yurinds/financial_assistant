@@ -4,8 +4,8 @@ class Budget < ApplicationRecord
   belongs_to :user
   has_many :operations
 
-  validates :date_from, presence: true, uniqueness: { case_sensitive: false }
-  validates :date_to, presence: true, uniqueness: { case_sensitive: false }
+  validates :date_from, presence: true, uniqueness: { case_sensitive: false, scope: :user_id }
+  validates :date_to, presence: true, uniqueness: { case_sensitive: false, scope: :user_id }
 
   before_validation :set_period
 
