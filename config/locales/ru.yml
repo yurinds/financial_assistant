@@ -102,3 +102,25 @@ ru:
 
   category:
     category_dependencies_error: 'По данной категории существуют операции! Удаление невозможно!'
+
+  activerecord:
+    models:
+      budget: 'Бюджет'
+      category: 'Категория'
+      operation: 'Операция'
+      user: 'Пользователь'
+
+    attributes:
+      budget:
+        date_from: 'Период с'
+        date_to: 'Период по'
+      category:
+        name: 'Название'
+      operation:
+        date: 'Дата'
+        operation_type: 'Тип'
+        description: 'Описание'
+        amount: 'Сумма'
+      user:
+        email: 'Электронная почта'
+        username: 'Имя пользователя'
