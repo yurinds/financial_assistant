@@ -6,7 +6,6 @@ document.addEventListener('turbolinks:load', e => {
   );
   const operationsTable = document.querySelector('tbody');
 
-  if (!operationsTable) return;
   if (!btnAddOperation) return;
 
   btnAddOperation.addEventListener('ajax:before', event => {
@@ -14,11 +13,13 @@ document.addEventListener('turbolinks:load', e => {
   });
 
   btnAddOperation.addEventListener('click', createOperationsForm);
-  operationsTable.addEventListener('click', ({ target }) => {
-    if (!target.nodeName === 'I') return;
+  if (operationsTable) {
+    operationsTable.addEventListener('click', ({ target }) => {
+      if (!target.nodeName === 'I') return;
 
-    createOperationsForm();
-  });
+      createOperationsForm();
+    });
+  }
 
   function createOperationsForm(event) {
     if (document.getElementById('collapseExample')) return;
