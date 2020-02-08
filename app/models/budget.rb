@@ -24,8 +24,9 @@ class Budget < ApplicationRecord
   end
 
   def operations_amount(type)
-    operations = Operation.all_by_budget(self)
-    operations.sum_by_type(type)
+    operations ||= Operation.type_and_sum_by_budget(self)
+
+    operations[type]
   end
 
   def to_s

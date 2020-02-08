@@ -14,6 +14,12 @@ class Operation < ApplicationRecord
   scope :count_by_budget, ->(budget) { where(budget: budget).count }
   scope :sum_by_type, ->(type) { where(operation_type: type).sum(:amount) }
   scope :count_by_category, ->(category) { where(category: category).count }
+  scope :type_and_sum_by_budget, lambda { |budget|
+                                   where(budget: budget)
+                                     .select(:operation_type, :amount)
+                                     .group(:operation_type)
+                                     .sum(:amount)
+                                 }
 
   def type
     # Тип операции может быть :income или :expense
