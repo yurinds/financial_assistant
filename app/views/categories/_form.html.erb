@@ -24,6 +24,12 @@
                               id:"inputName" %>
       </div>
 
+      <%# Тип операции %>
+      <div class="form-group">
+        <%= label_tag('inputType', t('.type'), class: 'font-weight-bold') %>
+        <%= select(:category, :operation_type, [[t('.type_income'), 'income'], [t('.type_expense'), 'expense']], {}, { placeholder: t('.type'), class: 'custom-select' }) %>
+      </div>
+
       <%# Отправка формы %>
       <div class="actions">
         <%= f.submit t('.send'), class: 'btn btn-primary mb-2' %>

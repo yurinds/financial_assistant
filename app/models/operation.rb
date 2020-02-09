@@ -21,6 +21,8 @@ class Operation < ApplicationRecord
                                      .sum(:amount)
                                  }
 
+  before_validation :set_operation_type!
+
   def type
     # Тип операции может быть :income или :expense
     I18n.t(".operation.#{operation_type}")
@@ -32,5 +34,9 @@ class Operation < ApplicationRecord
     return if budget_period.include?(date)
 
     errors.add(:date, I18n.t('.period_error'))
+  end
+
+  def set_operation_type!
+    self.operation_type = category.operation_type
   end
 end

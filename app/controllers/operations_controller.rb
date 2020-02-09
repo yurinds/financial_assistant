@@ -69,7 +69,6 @@ class OperationsController < ApplicationController
 
   def allowed_params
     params.require(:operation).permit(:date,
-                                      :operation_type,
                                       :description,
                                       :category_id,
                                       :amount)

@@ -80,9 +80,16 @@ ru:
   categories:
     form:
       name: 'Название'
+      type: 'Тип операции'
+      type_income: 'Приход'
+      type_expense: 'Расход'
       new_category: 'Создание категории'
       edit_category: 'Редактирование категории'
       send: 'Отправить'
+
+    category:
+      type_income: 'Приход'
+      type_expense: 'Расход'
 
     index:
       name: 'Название'
@@ -116,6 +123,8 @@ ru:
         date_to: 'Период по'
       category:
         name: 'Название'
+        operation_type: 'Тип операции'
+
       operation:
         date: 'Дата'
         operation_type: 'Тип'

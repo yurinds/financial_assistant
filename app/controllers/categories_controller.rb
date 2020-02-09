@@ -58,7 +58,7 @@ class CategoriesController < ApplicationController
   end
 
   def allowed_params
-    params.require(:category).permit(:name)
+    params.require(:category).permit(:name, :operation_type)
   end
 
   def find_category

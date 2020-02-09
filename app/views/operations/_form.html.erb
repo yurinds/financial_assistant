@@ -8,22 +8,10 @@
                               placeholder:t('.date') %>
   </div>
 
-  <div class="form-row">
-    <div class="col">
-      <%# Тип операции %>
-      <div class="form-group">
-        <%= label_tag('inputType', t('.type'), class: 'font-weight-bold') %>
-        <%= select(:operation, :operation_type, [["Приход", 'income'], ['Расход', 'expense']], {}, { placeholder: t('.type'), class: 'custom-select' }) %>
-      </div>
-    </div>
-
-    <%# Категория %>
-    <div class="col">
-      <div class="form-group">
-        <%= label_tag('inputCategory', t('.category'), class: 'font-weight-bold') %>
-        <%= f.collection_select(:category_id, categories, :id, :name, {}, { placeholder: t('.category'), class: 'custom-select' }) %>
-      </div>
-    </div>
+  <%# Категория %>
+  <div class="form-group">
+    <%= label_tag('inputCategory', t('.category'), class: 'font-weight-bold') %>
+    <%= f.collection_select(:category_id, categories, :id, :name, {}, { placeholder: t('.category'), class: 'custom-select' }) %>
   </div>
 
   <%# Описание %>
