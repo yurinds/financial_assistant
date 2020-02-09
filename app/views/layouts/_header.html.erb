@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+      <a class="nav-link" href=<%= root_path %>>
+        <%= t('layouts.app_name') %>
+      </a>
+    </li>
+  </ul>
+  <button class="navbar-toggler ml-auto" 
+          type="button" 
+          data-toggle="collapse" 
+          data-target="#navbarToggler" 
+          aria-controls="navbarToggler" 
+          aria-expanded="false" 
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarToggler">
+    <ul class="navbar-nav mt-2 mt-lg-0 ml-auto">
+      <% if user_signed_in? %>
+        <li class="nav-item ml-auto mb-1">
+          <%= link_to t('layouts.create_budget'), new_budget_path, class: 'btn btn-outline-warning my-2 my-sm-0 ml-2' %>
+        </li>
+        <li class="nav-item ml-auto mb-1">
+          <%= link_to t('layouts.categories'), categories_path, class: 'btn btn-outline-info my-2 my-sm-0 ml-2' %>
+        </li>
+        <li class="nav-item ml-auto mb-1">
+          <%= link_to t('layouts.sign_out'), destroy_user_session_path, class: 'btn btn-outline-danger my-2 my-sm-0 ml-2', 
+                                                          method: :delete %>
+        </li>
+      <% else %>
+        <li class="nav-item ml-auto">
+          <%= link_to link_to t('layouts.registration'), new_user_registration_path, class: 'btn btn-outline-success my-2 my-sm-0' %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
