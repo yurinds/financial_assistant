@@ -1,4 +1,4 @@
-<%= render partial: 'flash', object: @operation, as: 'resource' %>
+<%= render partial: 'partials/flash', object: @operation, as: 'resource' %>
 
 $("#collapseExample .card-body").html("<%= j(render partial: 'operations/form', 
                                             locals: {budget: @budget, 

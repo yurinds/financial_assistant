@@ -25,9 +25,7 @@ class CategoriesController < ApplicationController
     if @category.save
       redirect_to categories_path, notice: t('.success')
     else
-      respond_to do |format|
-        format.js { render :flash }
-      end
+      render_error_messages_by_js
     end
   end
 
@@ -35,23 +33,25 @@ class CategoriesController < ApplicationController
     if @category.update_attributes(allowed_params)
       redirect_to categories_path, notice: t('.success')
     else
-      respond_to do |format|
-        format.js { render :flash }
-      end
-    end
+      render_error_messages_by_js
+        end
   end
 
   def destroy
     if @category.destroy
       redirect_to categories_path, notice: t('.success')
     else
-      respond_to do |format|
-        format.js { render :flash }
-      end
-    end
+      render_error_messages_by_js
+        end
   end
 
   private
+
+  def render_error_messages_by_js
+    respond_to do |format|
+      format.js { render partial: 'partials/flash', object: @category, as: 'resource' }
+    end
+  end
 
   def find_categories_by_user
     @categories = Category.by_user(current_user)

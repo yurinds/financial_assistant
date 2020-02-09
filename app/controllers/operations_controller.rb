@@ -49,7 +49,7 @@ class OperationsController < ApplicationController
 
   def render_error_messages_by_js
     respond_to do |format|
-      format.js { render partial: 'operations/flash', object: @operation, as: 'resource' }
+      format.js { render partial: 'partials/flash', object: @operation, as: 'resource' }
     end
   end
 

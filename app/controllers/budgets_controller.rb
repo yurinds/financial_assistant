@@ -14,9 +14,7 @@ class BudgetsController < ApplicationController
     if @budget.save
       redirect_to @budget, notice: t('.created')
     else
-      respond_to do |format|
-        format.js { render :flash }
-      end
+      render_error_messages_by_js
     end
   end
 
@@ -40,13 +38,17 @@ class BudgetsController < ApplicationController
     if @budget.destroy
       redirect_to budgets_path, notice: t('.success')
     else
-      respond_to do |format|
-        format.js { render :flash }
-      end
+      render_error_messages_by_js
     end
   end
 
   private
+
+  def render_error_messages_by_js
+    respond_to do |format|
+      format.js { render partial: 'partials/flash', object: @budget, as: 'resource' }
+    end
+  end
 
   def find_budgets_by_user
     @budgets = Budget.all_by_user(current_user)
