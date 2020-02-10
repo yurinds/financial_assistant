@@ -6,14 +6,18 @@
 <tr>
   <td scope="row"><%= l(operation.date, format: :default) %></td>
   <td><%= operation.category %></td>
-  <td><%= operation.description %></td>
+  <td class="d-none d-lg-table-cell"><%= operation.description %></td>
   <td>
     <span class="<%= column_amount_class %> d-flex align-self-center">
       <%= symbol %>
       <%= operation.amount %>
       <span class="ml-auto">
         <%= link_to fa_icon('edit'), edit_budget_operation_path(budget, operation), remote: true %>
-        <%= link_to fa_icon('trash-o'), budget_operation_path(budget, operation), remote: true, method: :delete, class: "ml-1" %>
+        <%= link_to fa_icon('trash-o'), budget_operation_path(budget, operation), 
+                                       data: {confirm: 'Вы уверены?'},
+                                       remote: true,
+                                       method: :delete,
+                                       class: "ml-1" %>
       </span>
     </span>
   </td>

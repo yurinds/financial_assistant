@@ -9,7 +9,7 @@ class Category < ApplicationRecord
 
   before_destroy :check_for_dependent_operations
 
-  scope :by_user, ->(user) { where(user: user) }
+  scope :by_user, ->(user) { where(user: user).order(:name) }
 
   def check_for_dependent_operations
     return true if Operation.count_by_category(self) == 0
