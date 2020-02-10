@@ -12,8 +12,8 @@
   </div>
   <div class="card-body">
     <ul class="list-unstyled mt-3 mb-4">
-      <li>Сумма доходов: <%= budget.operations_amount('income') %> <%= t('currency.value') %> </li>
-      <li>Сумма расходов: <%= budget.operations_amount('expense') %> <%= t('currency.value') %></li>
+      <li>Сумма доходов: <%= number_to_currency(budget.operations_amount('income'), strip_insignificant_zeros: true) %> </li>
+      <li>Сумма расходов: <%= number_to_currency(budget.operations_amount('expense'), strip_insignificant_zeros: true) %> </li>
     </ul>
   </div>
 </div>

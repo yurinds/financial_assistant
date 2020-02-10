@@ -10,7 +10,7 @@
   <td>
     <span class="<%= column_amount_class %> d-flex align-self-center">
       <%= symbol %>
-      <%= operation.amount %>
+      <%= number_to_currency(operation.amount, strip_insignificant_zeros: true) %>
       <span class="ml-auto">
         <%= link_to fa_icon('edit'), edit_budget_operation_path(budget, operation), remote: true %>
         <%= link_to fa_icon('trash-o'), budget_operation_path(budget, operation), 
