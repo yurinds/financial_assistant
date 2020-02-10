@@ -1,24 +1,53 @@
-# README
+# financial_assistant
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+В этом приложении вы можете отслеживать все свои доходы и расходы за месяц.
 
-Things you may want to cover:
+Требуемая версия Ruby и Rails:
 
-* Ruby version
+```
+ruby >= 2.6.3
+rails ~> 5.2.3
+```
 
-* System dependencies
+Для запуска выполните в терминале следующие шаги:
 
-* Configuration
+1. Установите `Bundler`, если он ещё не установлен:
 
-* Database creation
+```
+gem install bundler
+```
 
-* Database initialization
+2. Склонируйте репозиторий:
 
-* How to run the test suite
+```
+git clone https://github.com/yurinds/financial_assistant.git
+# или
+git clone git@github.com:yurinds/financial_assistant.git
 
-* Services (job queues, cache servers, search engines, etc.)
+# переход в папку с приложением
+cd financial_assistant
+```
 
-* Deployment instructions
+3. Установите все зависимости:
 
-* ...
+```
+bundle install
+```
+
+4. Выполните миграции БД:
+
+```
+bundle exec rails db:migrate
+```
+
+5. Запустите сервер приложения:
+
+```
+bundle exec rails s
+```
+
+6. Откройте в браузере:
+
+```
+http://localhost:3000
+```
