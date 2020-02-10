@@ -1,43 +1,62 @@
-<h2><%= t('.title', resource: resource.model_name.human) %></h2>
+<div class="row justify-content-center">
+  <div class="col-md-12 col-lg-6">
+    <div class="card mt-2 border-dark mb-3">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="card-header">
+        <h2><%= t('.header') %></h2>
+      </div>
+      <div class="card-body">
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= form_with(model: resource, as: resource_name, local: true, url: registration_path(resource_name),  method: :put) do |f| %>
+          <%= render "partials/error", resource: resource %>
+
+          <div class="form-group">
+            <%= label_tag('inputEmail', t('.email'), class: 'font-weight-bold') %>
+            <%= f.email_field :email, autofocus: true, 
+                              autocomplete: "email", 
+                              class: "form-control", 
+                              id: "inputEmail", 
+                              placeholder: t('.email') %>
+          </div>
+          <div class="form-group">
+            <%= label_tag('inputUsername', t('.username'), class: 'font-weight-bold') %>
+            <%= f.text_field :username, autofocus: true, 
+                              class: "form-control", 
+                              id: "inputUsername", 
+                              placeholder: t('.username') %>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag('inputPassword1', t('.password'), class: 'font-weight-bold') %>
+            <%= label_tag('inputPassword1', t('.leave_blank_if_you_don_t_want_to_change_it'), class: 'font-italic') %>
+            <% if @minimum_password_length %>
+              <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+            <% end %>
+            <%= f.password_field :password, class: "form-control", 
+                                            id: "inputPassword1",
+                                            placeholder: t('.password') %>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag('inputPassword2', t('.password_confirmation'), class: 'font-weight-bold') %>
+            <%= f.password_field :password_confirmation, class: "form-control", 
+                                                         id: "inputPassword2",
+                                                         placeholder: t('.password_confirmation') %>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag('inputPassword3', t('.current_password'), class: 'font-weight-bold') %>
+            <%= label_tag('inputPassword3', t('.we_need_your_current_password_to_confirm_your_changes'), class: 'font-italic') %>
+            <%= f.password_field :current_password, class: "form-control", 
+                                                    id: "exampleInputPassword3",
+                                                    placeholder: t('.current_password') %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit t('.update'), class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div><%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit t('.update') %>
-  </div>
-<% end %>
-
-<h3><%= t('.cancel_my_account') %></h3>
-
-<p><%= t('.unhappy') %> <%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete %></p>
-
-<%= link_to t('devise.shared.links.back'), :back %>
+</div>

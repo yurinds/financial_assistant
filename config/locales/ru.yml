@@ -5,6 +5,7 @@ ru:
     create_budget: 'Создать бюджет'
     sign_out: 'Выйти'
     registration: 'Регистрация'
+    profile: 'Профиль'
 
   period_error: 'должна соответствовать периоду бюджета!'
   form_errors: 'В результате проверки формы %{errors_count}'
@@ -138,5 +139,15 @@ ru:
         description: 'Описание'
         amount: 'Сумма'
       user:
+        email: 'Электронная почта'
+        username: 'Имя пользователя'
+
+  devise:
+    registrations:
+      edit:
+        header: 'Редактирование профиля'
+        password: 'Пароль'
+        password_confirmation: 'Подтверждение пароля'
+        current_password: 'Текущий пароль'
         email: 'Электронная почта'
         username: 'Имя пользователя'
