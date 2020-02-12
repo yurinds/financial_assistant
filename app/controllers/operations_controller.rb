@@ -3,7 +3,7 @@
 class OperationsController < ApplicationController
   before_action :find_operation, only: %i[edit update destroy]
   before_action :find_budget
-  before_action :set_dependencies, only: %i[create update new edit]
+  before_action :find_categories, only: %i[create update new edit]
 
   def new
     @operation = @budget.operations.build
@@ -53,9 +53,7 @@ class OperationsController < ApplicationController
     end
   end
 
-  def set_dependencies
-    @budgets = Budget.all_by_user(current_user)
-    @operations = Operation.all_by_budget(@budget)
+  def find_categories
     @categories = Category.by_user(current_user)
   end
 

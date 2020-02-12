@@ -10,7 +10,7 @@ class Operation < ApplicationRecord
 
   validate :operation_date_should_correspond_to_budget_period
 
-  scope :all_by_budget, ->(budget) { where(budget: budget).includes(:category).order(:date) }
+  scope :all_by_budget, ->(budget) { where(budget: budget).includes(:category).order(:date).order('categories.name') }
   scope :count_by_budget, ->(budget) { where(budget: budget).count }
   scope :sum_by_type, ->(type) { where(operation_type: type).sum(:amount) }
   scope :count_by_category, ->(category) { where(category: category).count }
