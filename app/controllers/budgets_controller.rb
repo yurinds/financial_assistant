@@ -32,6 +32,7 @@ class BudgetsController < ApplicationController
     @operations = Operation.all_by_budget(@budget)
     @operation = @budget.operations.build
     @categories = Category.by_user(current_user)
+    @payment_methods = PaymentMethod.by_user(current_user)
   end
 
   def destroy

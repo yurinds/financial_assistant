@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-md-12 col-lg-6">
+    <div class="card mt-3">
+      <div class="card-header">
+        <h3><%= t('.head') %></h3>
+      </div>
+
+      <%# Таблица всех операций %>
+      <% unless @payment_methods.empty? %>
+        <div class="card-body">
+          <table class="table mt-4">
+            <tbody>
+              <%= render partial: "payment_methods/payment_method", collection: @payment_methods %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+
+  <div class="col-md-12 col-lg-6 form">
+    <%= render partial: "payment_methods/form",  object: @card, as: 'card' %>
+  </div>
+</div>

@@ -3,6 +3,7 @@
 class Operation < ApplicationRecord
   belongs_to :budget
   belongs_to :category
+  belongs_to :payment_method, optional: true
 
   validates :date, presence: true
   validates :operation_type, presence: true
@@ -10,10 +11,11 @@ class Operation < ApplicationRecord
 
   validate :operation_date_should_correspond_to_budget_period
 
-  scope :all_by_budget, ->(budget) { where(budget: budget).includes(:category).order(:date).order('categories.name') }
+  scope :all_by_budget, ->(budget) { where(budget: budget).includes(:category, :payment_method).order(:date).order('categories.name') }
   scope :count_by_budget, ->(budget) { where(budget: budget).count }
   scope :sum_by_type, ->(type) { where(operation_type: type).sum(:amount) }
   scope :count_by_category, ->(category) { where(category: category).count }
+  scope :count_by_payment_method, ->(payment_method) { where(payment_method: payment_method).count }
   scope :type_and_sum_by_budget, lambda { |budget|
                                    where(budget: budget)
                                      .select(:operation_type, :amount)

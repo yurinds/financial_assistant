@@ -1,0 +1,40 @@
+<div class="card mt-3 card-form">
+  <div class="card-header">
+
+    <% if @payment_method.persisted? %>
+      <span class="d-flex">
+        <h3><%= t('.edit_payment_method') %></h3>
+        <%=link_to fa_icon('window-close'), new_payment_method_path, remote: true, class: "ml-auto align-self-center" %>
+      </span>
+    <% else %>
+      <h3><%= t('.new_payment_method') %></h3>
+
+    <% end %>
+
+  </div>
+
+  <div class="card-body">
+
+    <%= form_with(model: @payment_method) do |f| %>
+      <%# Наименование %>
+      <div class="form-group">
+        <%= label_tag('inputName', t('.name'), class: 'font-weight-bold') %>
+        <%= f.text_field :name, autofocus: true, 
+                              class: "form-control", 
+                              id:"inputName" %>
+      </div>
+
+      <%# Это наличный расчет %>
+      <div class="form-group form-check">
+        <%= f.check_box :is_cash, class: "form-check-input" %>
+        <%= f.label :is_cash, { class: 'form-check-label' } %>
+      </div>
+
+      <%# Отправка формы %>
+      <div class="actions">
+        <%= f.submit t('.send'), class: 'btn btn-primary mb-2' %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

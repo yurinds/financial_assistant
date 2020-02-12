@@ -6,6 +6,7 @@ ru:
     sign_out: 'Выйти'
     registration: 'Регистрация'
     profile: 'Профиль'
+    payment_methods: 'Способы оплаты'
 
   period_error: 'должна соответствовать периоду бюджета!'
   form_errors: 'В результате проверки формы %{errors_count}'
@@ -43,6 +44,7 @@ ru:
       date: 'Дата'
       operation_type: 'Тип'
       category: 'Категория'
+      payment_method: 'Способ оплаты'
       description: 'Описание'
       amount: 'Сумма'
 
@@ -63,11 +65,39 @@ ru:
   budget:
     dependencies_error: 'По данному бюджету существуют операции! Удаление невозможно!'
 
+  payment_methods:
+    form:
+      name: 'Наименование способа оплаты'
+      is_cash: 'Наличный расчет'
+      new_payment_method: 'Создание способа оплаты'
+      edit_payment_method: 'Редактирование способа оплаты'
+      send: 'Отправить'
+
+    index:
+      name: 'Наименование'
+      head: 'Список способов оплаты'
+
+    create:
+      success: 'Способ оплаты успешно создан!'
+      error: 'Ошибка при создании способа оплаты!'
+
+    update:
+      success: 'Способ оплаты успешно обновлен!'
+      error: 'Ошибка при обновлении способа оплаты!'
+
+    destroy:
+      success: 'Способ оплаты успешно удален!'
+      error: 'Ошибка при удалении способа оплаты!'
+
+  payment_method:
+    payment_method_dependencies_error: 'К данной карте есть привязанные операции! Удаление невозможно!'
+
   operations:
     form:
       date: 'Дата операции'
       type: 'Тип операции'
       category: 'Категория'
+      payment_method: 'Способ оплаты'
       description: 'Описание'
       amount: 'Сумма'
       send: 'Отправить'
@@ -124,6 +154,7 @@ ru:
       category: 'Категория'
       operation: 'Операция'
       user: 'Пользователь'
+      payment_method: 'Способы оплаты'
 
     attributes:
       budget:
@@ -132,6 +163,9 @@ ru:
       category:
         name: 'Название'
         operation_type: 'Тип операции'
+      payment_method:
+        name: 'Наименование'
+        is_cash: 'Наличный расчет'
 
       operation:
         date: 'Дата'

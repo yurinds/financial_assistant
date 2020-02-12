@@ -14,6 +14,12 @@
     <%= f.collection_select(:category_id, categories, :id, :name, {}, { placeholder: t('.category'), class: 'custom-select' }) %>
   </div>
 
+  <%# Способ оплаты %>
+  <div class="form-group">
+    <%= label_tag('inputCategory', t('.payment_method'), class: 'font-weight-bold') %>
+    <%= f.collection_select(:payment_method_id, payment_methods, :id, :name, {}, { placeholder: t('.payment_method'), class: 'custom-select' }) %>
+  </div>
+
   <%# Описание %>
   <div class="form-group">
     <%= label_tag('inputDescription', t('.description'), class: 'font-weight-bold') %>

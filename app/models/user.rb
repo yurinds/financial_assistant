@@ -6,9 +6,9 @@ class User < ApplicationRecord
 
   has_many :budgets
   has_many :categories
+  has_many :payment_methods
 
   validates :username, presence: true, length: { maximum: 35 }
 
-  validates :email, presence: true
-  validates :email, uniqueness: true
+  validates :email, presence: true, uniqueness: true
 end

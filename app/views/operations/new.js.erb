@@ -3,6 +3,7 @@
 $("#collapseExample .card-body").html("<%= j(render partial: 'operations/form', 
                                             locals: {budget: @budget, 
                                                     operation: @operation, 
-                                                    categories: @categories}) %>");
+                                                    categories: @categories,
+                                                    payment_methods: @payment_methods}) %>");
 
 $("#collapseExample").collapse('show');

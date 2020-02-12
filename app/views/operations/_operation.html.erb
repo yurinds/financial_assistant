@@ -6,6 +6,7 @@
 <tr>
   <td scope="row"><%= l(operation.date, format: :default) %></td>
   <td><%= operation.category %></td>
+  <td class="d-none d-lg-table-cell"><%= operation.payment_method %></td>
   <td class="d-none d-lg-table-cell"><%= operation.description %></td>
   <td>
     <span class="<%= column_amount_class %> d-flex align-self-center">

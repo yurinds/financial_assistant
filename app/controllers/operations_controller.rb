@@ -4,6 +4,7 @@ class OperationsController < ApplicationController
   before_action :find_operation, only: %i[edit update destroy]
   before_action :find_budget
   before_action :find_categories, only: %i[create update new edit]
+  before_action :find_payment_methods, only: %i[create update new edit]
 
   def new
     @operation = @budget.operations.build
@@ -57,6 +58,10 @@ class OperationsController < ApplicationController
     @categories = Category.by_user(current_user)
   end
 
+  def find_payment_methods
+    @payment_methods = PaymentMethod.by_user(current_user)
+  end
+
   def find_operation
     @operation = Operation.find(params[:id])
   end
@@ -69,6 +74,7 @@ class OperationsController < ApplicationController
     params.require(:operation).permit(:date,
                                       :description,
                                       :category_id,
+                                      :payment_method_id,
                                       :amount)
   end
 end

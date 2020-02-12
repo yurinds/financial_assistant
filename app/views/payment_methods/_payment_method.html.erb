@@ -1,0 +1,16 @@
+<tr>
+  <td class="d-flex align-self-center" scope="row">
+    <span>
+      <%= payment_method %>
+      <%= '(нал.)' if payment_method.cash? %>
+    </span>
+    <span class="ml-auto">
+      <%=link_to fa_icon('edit'), edit_payment_method_path(payment_method), remote: true %>
+      <%=link_to fa_icon('trash-o'), payment_method_path(payment_method), 
+                                                  data: {confirm: 'Вы уверены?'},
+                                                  remote: true, 
+                                                  method: :delete,
+                                                  class: "ml-1"%>
+    </span>
+  </td>
+</tr>
