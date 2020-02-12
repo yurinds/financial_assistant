@@ -1,5 +1,6 @@
-<div class="card mb-4 pointer <%= "border border-success shadow" if budget == current_budget  %>" 
-                                data-url="<%= budget_path(budget) %>">
+<div class="card ml-2 pointer mt-3 item <%= "border border-success shadow" if budget == current_budget  %>" 
+                                data-url="<%= budget_path(budget) %>"
+                                data-hash="<%= budget.id %>">
   <div class="card-header">
 
     <span class="d-flex">

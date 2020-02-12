@@ -1,5 +1,6 @@
 <%# Список бюджетов %>
-<div class="card-deck mb-3 text-center mt-3">
+
+<div class="owl-carousel owl-theme text-center">
   <%= render partial: "budget", collection: @budgets, locals: {current_budget: @budget} %>
 </div>
 

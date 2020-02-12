@@ -1,8 +1,19 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-document.addEventListener('turbolinks:load', _ => {
+document.addEventListener('turbolinks:load', onBudgetTurbolinksLoadHandler);
+
+function onBudgetTurbolinksLoadHandler(event) {
+  loadMonthpicker();
+  loadOwlCarousel();
+
+  createCardsOnClickHandler();
+  addClassToOwlCarousel();
+}
+
+function loadMonthpicker() {
   $('#monthpicker').datetimepicker({
+    locale: 'ru',
     viewMode: 'months',
     format: 'YYYY/MM',
     toolbarPlacement: 'top',
@@ -19,8 +30,38 @@ document.addEventListener('turbolinks:load', _ => {
       close: 'fa fa-remove',
     },
   });
+}
 
-  const cardDesk = document.querySelector('.card-deck');
+function loadOwlCarousel() {
+  const windowLocation = window.location.href;
+
+  let matchData = windowLocation.match(/budgets\/+\d{1,}/);
+  let startPosition = '';
+
+  if (matchData) {
+    startPosition = matchData[0].match(/\d{1,}/)[0];
+  }
+  window.location.hash = '#' + startPosition;
+
+  $('.owl-carousel').owlCarousel({
+    startPosition: startPosition,
+    margin: 10,
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 1,
+        nav: true,
+      },
+      1000: {
+        items: 3,
+        nav: true,
+      },
+    },
+  });
+}
+
+function createCardsOnClickHandler() {
+  const cardDesk = document.querySelector('.owl-carousel');
 
   if (!cardDesk) return;
 
@@ -32,4 +73,14 @@ document.addEventListener('turbolinks:load', _ => {
 
     Turbolinks.visit(parentElement.dataset.url);
   });
-});
+}
+
+function addClassToOwlCarousel(params) {
+  const owlCarouselDots = document.querySelector('.owl-dots.disabled');
+  const owlCarousel = document.querySelector('.owl-carousel');
+
+  if (!owlCarouselDots) return;
+  if (!owlCarousel) return;
+
+  owlCarousel.classList.add('mb-3');
+}

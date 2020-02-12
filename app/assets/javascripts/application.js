@@ -16,5 +16,7 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require moment
+//= require moment/ru
 //= require bootstrap-datetimepicker
+//= require owl.carousel
 //= require_tree .
