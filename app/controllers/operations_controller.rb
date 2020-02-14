@@ -15,6 +15,8 @@ class OperationsController < ApplicationController
   end
 
   def edit
+    authorize @operation
+
     respond_to do |format|
       format.js { render :new }
     end
@@ -31,6 +33,8 @@ class OperationsController < ApplicationController
   end
 
   def update
+    authorize @operation
+
     if @operation.update_attributes(allowed_params)
       redirect_to @budget, notice: t('.success')
     else
@@ -39,6 +43,8 @@ class OperationsController < ApplicationController
   end
 
   def destroy
+    authorize @operation
+
     if @operation.destroy
       redirect_to @budget, notice: t('.success')
     else

@@ -40,6 +40,7 @@ gem "font-awesome-rails"
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17'
 gem 'owlcarousel-rails'
+gem "pundit"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
