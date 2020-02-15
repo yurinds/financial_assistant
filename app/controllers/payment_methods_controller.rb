@@ -14,6 +14,8 @@ class PaymentMethodsController < ApplicationController
   end
 
   def edit
+    authorize @payment_method
+
     respond_to do |format|
       format.js { render :form }
     end
@@ -30,6 +32,8 @@ class PaymentMethodsController < ApplicationController
   end
 
   def update
+    authorize @payment_method
+
     if @payment_method.update_attributes(allowed_params)
       redirect_to payment_methods_path, notice: t('.success')
     else
@@ -38,6 +42,8 @@ class PaymentMethodsController < ApplicationController
   end
 
   def destroy
+    authorize @payment_method
+
     if @payment_method.destroy
       redirect_to payment_methods_path, notice: t('.success')
     else

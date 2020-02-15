@@ -14,6 +14,8 @@ class CategoriesController < ApplicationController
   end
 
   def edit
+    authorize @category
+
     respond_to do |format|
       format.js { render :form }
     end
@@ -30,6 +32,8 @@ class CategoriesController < ApplicationController
   end
 
   def update
+    authorize @category
+
     if @category.update_attributes(allowed_params)
       redirect_to categories_path, notice: t('.success')
     else
@@ -38,6 +42,8 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    authorize @category
+
     if @category.destroy
       redirect_to categories_path, notice: t('.success')
     else
