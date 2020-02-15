@@ -29,6 +29,8 @@ class BudgetsController < ApplicationController
   end
 
   def show
+    authorize @budget
+
     @operations = Operation.all_by_budget(@budget)
     @operation = @budget.operations.build
     @categories = Category.by_user(current_user)
@@ -36,6 +38,8 @@ class BudgetsController < ApplicationController
   end
 
   def destroy
+    authorize @budget
+
     if @budget.destroy
       redirect_to budgets_path, notice: t('.success')
     else
