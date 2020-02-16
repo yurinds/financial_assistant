@@ -1,0 +1,13 @@
+<% date = daily_analytics_row[:date] %>
+<% expenses = daily_analytics_row[:expenses] %>
+<% amount = daily_analytics_row[:amount] %>
+<% balance = daily_analytics_row[:balance] %>
+<% class_amount = amount.positive? ? 'text-success font-weight-bold' : 'text-danger font-weight-bold'  %>
+<% class_balance = balance.positive? ? 'text-success' : 'text-danger'  %>
+
+<tr>
+  <td scope="row"><%= l(date, format: :default) %></td>
+  <td scope="row"><%= number_to_currency(expenses, strip_insignificant_zeros: true) %></td>
+  <td scope="row" class="<%= class_amount %>"><%= number_to_currency(amount, strip_insignificant_zeros: true) %></td>
+  <td scope="row" class="<%= class_balance %>"><%= number_to_currency(balance, strip_insignificant_zeros: true) %></td>
+</tr>

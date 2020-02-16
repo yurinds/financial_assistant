@@ -13,4 +13,5 @@ class BudgetPolicy < ApplicationPolicy
   end
 
   alias destroy? show?
+  alias index? show?
 end

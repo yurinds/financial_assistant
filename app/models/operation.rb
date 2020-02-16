@@ -16,12 +16,21 @@ class Operation < ApplicationRecord
   scope :sum_by_type, ->(type) { where(operation_type: type).sum(:amount) }
   scope :count_by_category, ->(category) { where(category: category).count }
   scope :count_by_payment_method, ->(payment_method) { where(payment_method: payment_method).count }
-  scope :type_and_sum_by_budget, lambda { |budget|
-                                   where(budget: budget)
-                                     .select(:operation_type, :amount)
-                                     .group(:operation_type)
-                                     .sum(:amount)
-                                 }
+  scope :type_and_sum_by_budget, (lambda do |budget|
+    where(budget: budget)
+      .select(:operation_type, :amount)
+      .group(:operation_type)
+      .sum(:amount)
+  end)
+  scope :daily_expenses, (lambda do |budget|
+    where(budget: budget)
+      .where(operation_type: 'expense')
+      .select(:date, :amount)
+      .group(:date)
+      .sum(:amount)
+  end)
+  scope :amount_of_income, ->(budget) { where(budget: budget).where(operation_type: 'income').sum(:amount) }
+  # Ex:- scope :active, -> {where(:active => true)}
 
   before_validation :set_operation_type!
 
