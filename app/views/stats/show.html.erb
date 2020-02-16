@@ -10,24 +10,72 @@
        aria-controls="daily_analytics" 
        aria-selected="true"><%= t('.daily_analytics') %></a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" 
+       id="categories-tab" 
+       data-toggle="tab" 
+       href="#categories" 
+       role="tab" 
+       aria-controls="categories" 
+       aria-selected="true"><%= t('.categories') %></a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" 
+       id="payment-methods-tab" 
+       data-toggle="tab" 
+       href="#payment-methods" 
+       role="tab" 
+       aria-controls="payment-methods" 
+       aria-selected="true"><%= t('.payment_methods') %></a>
+  </li>
+
 </ul>
 
 <div class="tab-content mt-3" id="myTabContent">
-  <div class="tab-pane fade show active" id="daily_analytics" role="tabpanel" aria-labelledby="daily_analytics-tab">
 
-    <table class="table ">
+  <div class="tab-pane fade show active" id="daily_analytics" role="tabpanel" aria-labelledby="daily_analytics-tab">
+    <table class="table">
       <thead class="thead-dark">
         <tr>
-          <th scope="col">Дата</th>
-          <th scope="col">Сумма расходов</th>
-          <th scope="col">Бюджет на день</th>
-          <th scope="col">Сальдо</th>
+          <th scope="col"><%= t('.date') %></th>
+          <th scope="col"><%= t('.expenses') %></th>
+          <th scope="col"><%= t('.daily_amount') %></th>
+          <th scope="col"><%= t('.balance') %></th>
         </tr>
       </thead>
       <tbody>
         <%= render partial: 'daily_analytics_row', collection: @daily_analytics %>
       </tbody>
     </table>
-
   </div>
+
+  <div class="tab-pane fade show" id="categories" role="tabpanel" aria-labelledby="categories-tab">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col"><%= t('.category') %></th>
+          <th scope="col"><%= t('.amount') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'categories_row', collection: @categories %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tab-pane fade show" id="payment-methods" role="tabpanel" aria-labelledby="payment-methods-tab">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col"><%= t('.payment_method') %></th>
+          <th scope="col"><%= t('.amount') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'payment_methods_row', collection: @payment_methods %>
+      </tbody>
+    </table>
+  </div>
+
 </div>

@@ -1,0 +1,21 @@
+<%= form_with(model: budget) do |f| %>
+  <%# Дата операции %>
+  <div class="form-group">
+    <%= label_tag('monthpicker', t('.date'), class: 'font-weight-bold') %>
+    <%= f.text_field :date,  
+                              class: "form-control", 
+                              id:"monthpicker" %>
+  </div>
+
+  <%# Откладываем %>
+  <div class="form-group">
+    <%= label_tag('save_percent', t('.save_percent'), class: 'font-weight-bold') %>
+    <%= f.text_field :save_percent,  
+                           class: "form-control" %>
+  </div>
+
+  <%# Отправка формы %>
+  <div class="actions">
+    <%= f.submit t('.send'), class: 'btn btn-primary mb-2' %>
+  </div>
+<% end %>

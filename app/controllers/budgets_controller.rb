@@ -2,7 +2,7 @@
 
 class BudgetsController < ApplicationController
   before_action :find_budgets_by_user, only: %i[index show]
-  before_action :find_budget, only: %i[destroy show]
+  before_action :find_budget, only: %i[edit update destroy show]
 
   def new
     @new_budget = current_user.budgets.build
@@ -35,6 +35,20 @@ class BudgetsController < ApplicationController
     @operation = @budget.operations.build
     @categories = Category.by_user(current_user)
     @payment_methods = PaymentMethod.by_user(current_user)
+  end
+
+  def edit
+    authorize @budget
+  end
+
+  def update
+    authorize @budget
+
+    if @budget.update_attributes(allowed_params)
+      redirect_to categories_path, notice: t('.success')
+    else
+      render_error_messages_by_js
+    end
   end
 
   def destroy

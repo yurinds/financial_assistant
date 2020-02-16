@@ -38,7 +38,7 @@ class CategoriesController < ApplicationController
       redirect_to categories_path, notice: t('.success')
     else
       render_error_messages_by_js
-        end
+    end
   end
 
   def destroy

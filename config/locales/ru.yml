@@ -40,6 +40,18 @@ ru:
   stats:
     show:
       daily_analytics: 'Аналитика по дням'
+      date: 'Дата'
+      expenses: 'Сумма расходов'
+      daily_amount: 'Бюджет на день'
+      balance: 'Сальдо'
+
+      categories: 'По категориям'
+      category: 'Категория'
+      amount: 'Сумма'
+
+      payment_methods: 'По способам оплаты'
+      payment_method: 'Способ оплаты'
+      empty_name: '(не указан)'
 
   budgets:
     index:
@@ -54,11 +66,13 @@ ru:
       amount: 'Сумма'
 
     new:
-      date_from: 'Дата начала периода'
+      head: 'Создание бюджета'
+    edit:
+      head: 'Редактирование бюджета'
+    form:
       date: 'Период'
       save_percent: 'Процент откладываем'
       send: 'Отправить'
-      head: 'Создание бюджета'
 
     create:
       created: 'Бюджет успешно создан!'
@@ -69,7 +83,7 @@ ru:
       error: 'Ошибка при удалении бюджета!'
 
   budget:
-    dependencies_error: 'По данному бюджету существуют операции! Удаление невозможно!'
+    dependencies_error: 'По данному бюджету существуют операции! Выполнение действия невозможо!'
 
   payment_methods:
     form:
