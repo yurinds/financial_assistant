@@ -13,5 +13,7 @@ class BudgetPolicy < ApplicationPolicy
   end
 
   alias destroy? show?
+  alias update? show?
+  alias edit? show?
   alias index? show?
 end

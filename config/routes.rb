@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :payment_methods, except: %i[show]
   resources :stats, only: %i[index show]
 
-  resources :budgets, except: %i[edit update] do
+  resources :budgets do
     resources :operations, except: %i[show index]
   end
 end

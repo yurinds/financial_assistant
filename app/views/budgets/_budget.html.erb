@@ -4,10 +4,14 @@
   <div class="card-header">
 
     <span class="d-flex">
-      <h2 class="my-0 font-weight-normal">
+      <h3 class="my-0 font-weight-normal">
         <%= link_to budget, budget_path(budget)%>
-      </h2>
-      <%= link_to fa_icon('trash-o 2x'), budget_path(budget), remote: true, method: :delete, class: "ml-1 ml-auto align-self-center" %>
+      </h3>
+      <span class="ml-auto">
+
+        <%= link_to fa_icon('edit 2x'), edit_budget_path(budget), class: "align-self-center" %>
+        <%= link_to fa_icon('trash-o 2x'), budget_path(budget), remote: true, method: :delete, class: "ml-1 align-self-center" %>
+      </span>
     </span>
 
   </div>

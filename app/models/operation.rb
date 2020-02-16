@@ -13,9 +13,9 @@ class Operation < ApplicationRecord
 
   scope :all_by_budget, ->(budget) { where(budget: budget).includes(:category, :payment_method).order(:date).order('categories.name') }
   scope :count_by_budget, ->(budget) { where(budget: budget).count }
-  scope :sum_by_type, ->(type) { where(operation_type: type).sum(:amount) }
   scope :count_by_category, ->(category) { where(category: category).count }
   scope :count_by_payment_method, ->(payment_method) { where(payment_method: payment_method).count }
+  scope :sum_by_type, ->(type) { where(operation_type: type).sum(:amount) }
   scope :type_and_sum_by_budget, (lambda do |budget|
     where(budget: budget)
       .select(:operation_type, :amount)
@@ -30,7 +30,13 @@ class Operation < ApplicationRecord
       .sum(:amount)
   end)
   scope :amount_of_income, ->(budget) { where(budget: budget).where(operation_type: 'income').sum(:amount) }
-  # Ex:- scope :active, -> {where(:active => true)}
+  scope :grouped_by_categories_amount, ->(budget) { select(:category, :amount).where(budget: budget).group(:category).sum(:amount) }
+  scope :grouped_by_payment_methods_amount, (lambda do |budget|
+    select(:payment_method, :amount)
+    .where(budget: budget)
+    .group(:payment_method)
+    .sum(:amount)
+  end)
 
   before_validation :set_operation_type!
 

@@ -1,0 +1,12 @@
+<% payment_method = payment_methods_row.first %>
+<% expenses = payment_methods_row.last %>
+<% payment_method_name = payment_method || t('stats.show.empty_name') %>
+
+<tr>
+  <td scope="row"><%= payment_method_name %></td>
+  <td scope="row" class="font-weight-bold text-success">
+    <span>
+      <%= number_to_currency(expenses, strip_insignificant_zeros: true) %>
+    </span>
+  </td>
+</tr>
