@@ -1,6 +1,7 @@
 ru:
   layouts:
-    app_name: 'Мой финансовый помощник'
+    app_name: 'Финансовый помощник'
+    stats: 'Статистика'
     categories: 'Категории'
     create_budget: 'Создать бюджет'
     sign_out: 'Выйти'
@@ -36,6 +37,10 @@ ru:
     income: 'Приход'
     expense: 'Расход'
 
+  stats:
+    show:
+      daily_analytics: 'Аналитика по дням'
+
   budgets:
     index:
 
@@ -51,6 +56,7 @@ ru:
     new:
       date_from: 'Дата начала периода'
       date: 'Период'
+      save_percent: 'Процент откладываем'
       send: 'Отправить'
       head: 'Создание бюджета'
 
@@ -160,6 +166,7 @@ ru:
       budget:
         date_from: 'Период с'
         date_to: 'Период по'
+        save_percent: 'Откладываем'
       category:
         name: 'Название'
         operation_type: 'Тип операции'

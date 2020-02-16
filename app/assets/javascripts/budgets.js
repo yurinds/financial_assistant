@@ -33,6 +33,9 @@ function loadMonthpicker() {
 }
 
 function loadOwlCarousel() {
+  const carousel = document.querySelector('.owl-carousel');
+  if (!carousel) return;
+
   const windowLocation = window.location.href;
 
   let matchData = windowLocation.match(/budgets\/+\d{1,}/);

@@ -19,6 +19,9 @@
     <ul class="navbar-nav mt-2 mt-lg-0 ml-auto">
       <% if user_signed_in? %>
         <li class="nav-item ml-auto mb-1">
+          <%= link_to t('layouts.stats'), stats_path, class: 'btn btn-outline-secondary my-2 my-sm-0 ml-2' %>
+        </li>
+        <li class="nav-item ml-auto mb-1">
           <%= link_to t('layouts.create_budget'), new_budget_path, class: 'btn btn-outline-warning my-2 my-sm-0 ml-2' %>
         </li>
         <li class="nav-item ml-auto mb-1">
