@@ -1,11 +1,20 @@
-<% payment_method = payment_methods_row.first %>
-<% expenses = payment_methods_row.last %>
+<% symbol = "-" if payment_methods_row.operation_type == 'expense' %>
+<% symbol = "+" if payment_methods_row.operation_type == 'income' %>
+<% payment_method = payment_methods_row.payment_method %>
+<% expenses = payment_methods_row.amount %>
 <% payment_method_name = payment_method || t('stats.show.empty_name') %>
+<% class_row = payment_methods_row.operation_type == 'expense' ? 'text-danger' : 'text-success'  %>
 
 <tr>
-  <td scope="row"><%= payment_method_name %></td>
-  <td scope="row" class="font-weight-bold text-success">
+  <td scope="row">
     <span>
+      <%= payment_method_name %>
+      (<%= t("categories.category.type_#{payment_methods_row.operation_type}") %>)
+    </span>
+  </td>
+  <td scope="row" class="font-weight-bold text-success <%= class_row %>">
+    <span>
+      <%= symbol %>
       <%= number_to_currency(expenses, strip_insignificant_zeros: true) %>
     </span>
   </td>

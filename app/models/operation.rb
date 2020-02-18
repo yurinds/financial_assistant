@@ -31,14 +31,31 @@ class Operation < ApplicationRecord
   end)
   scope :amount_of_income, ->(budget) { where(budget: budget).where(operation_type: 'income').sum(:amount) }
   scope :grouped_by_categories_amount, ->(budget) { select(:category, :amount).where(budget: budget).group(:category).sum(:amount) }
-  scope :grouped_by_payment_methods_amount, (lambda do |budget|
-    select(:payment_method, :amount)
-    .where(budget: budget)
-    .group(:payment_method)
-    .sum(:amount)
-  end)
 
   before_validation :set_operation_type!
+
+  PaymentMethodOperation = Struct.new(:payment_method, :operation_type, :amount)
+
+  def self.grouped_by_payment_method_amount(budget)
+    relation = select(:payment_method_id, :operation_type, :amount)
+               .where(budget: budget)
+               .group(:payment_method_id, :operation_type)
+               .sum(:amount)
+
+    payment_method_ids = relation.keys.map(&:first).reject(&:nil?)
+    payment_methods = PaymentMethod.find(payment_method_ids)
+
+    pay_method_to_relation = payment_method_ids.zip(payment_methods).to_h
+
+    relation.each_with_object([]) do |(key, value), acc|
+      payment_method = pay_method_to_relation[key.first]
+      type = key.last
+      amount = value
+
+      acc << PaymentMethodOperation.new(payment_method, type, amount)
+      acc
+    end
+  end
 
   def type
     # Тип операции может быть :income или :expense
