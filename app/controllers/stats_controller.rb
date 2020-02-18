@@ -19,7 +19,7 @@ class StatsController < ApplicationController
 
     @daily_analytics = @current_budget.daily_analytics
     @categories = Operation.grouped_by_categories_amount(@current_budget)
-    @payment_methods = Operation.grouped_by_payment_methods_amount(@current_budget)
+    @payment_methods = Operation.grouped_by_payment_method_amount(@current_budget)
   end
 
   private
