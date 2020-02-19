@@ -4,6 +4,8 @@ class Category < ApplicationRecord
   belongs_to :user
   has_many :operations
 
+  enum operation_type: %i[expense income]
+
   validates :name, presence: true, uniqueness: { case_sensitive: false, scope: :user_id }, length: { maximum: 20 }
   validates :operation_type, presence: true
 

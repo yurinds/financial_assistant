@@ -1,7 +1,7 @@
-<% symbol = "-" if operation.operation_type == 'expense' %>
-<% symbol = "+" if operation.operation_type == 'income' %>
-<% column_amount_class = "text-danger" if operation.operation_type == 'expense' %>
-<% column_amount_class = "text-success" if operation.operation_type == 'income' %>
+<% symbol = "-" if operation.expense? %>
+<% symbol = "+" if operation.income? %>
+<% column_amount_class = "text-danger" if operation.expense? %>
+<% column_amount_class = "text-success" if operation.income? %>
 
 <tr>
   <td scope="row"><%= l(operation.date, format: :default) %></td>
