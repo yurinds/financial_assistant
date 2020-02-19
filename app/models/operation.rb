@@ -11,6 +11,8 @@ class Operation < ApplicationRecord
 
   validate :operation_date_should_correspond_to_budget_period
 
+  enum operation_type: %i[expense income]
+
   scope :all_by_budget, ->(budget) { where(budget: budget).includes(:category, :payment_method).order(:date).order('categories.name') }
   scope :count_by_budget, ->(budget) { where(budget: budget).count }
   scope :count_by_category, ->(category) { where(category: category).count }
