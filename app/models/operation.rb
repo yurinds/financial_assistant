@@ -45,7 +45,7 @@ class Operation < ApplicationRecord
     payment_method_ids = relation.keys.map(&:first).reject(&:nil?)
     payment_methods = PaymentMethod.find(payment_method_ids)
 
-    pay_method_to_relation = payment_method_ids.zip(payment_methods).to_h
+    pay_method_to_relation = payment_methods.map { |item| [item.id, item] }.to_h
 
     relation.each_with_object([]) do |(key, value), acc|
       payment_method = pay_method_to_relation[key.first]
