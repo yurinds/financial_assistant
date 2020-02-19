@@ -25,8 +25,9 @@
 
       <%# Тип операции %>
       <div class="form-group">
-        <%= label_tag('inputType', t('.type'), class: 'font-weight-bold') %>
-        <%= select(:category, :operation_type, [[t('.type_income'), 'income'], [t('.type_expense'), 'expense']], {}, { placeholder: t('.type'), class: 'custom-select' }) %>
+        <%= label_tag('category_operation_type', t('.type'), class: 'font-weight-bold') %>
+        <% selected =  @category.operation_type || '' %>
+        <%= f.select(:operation_type, options_for_select(operation_types, selected), {prompt: true}, { placeholder: t('.type'), class: 'custom-select', selected: '0' }) %>
       </div>
 
       <%# Отправка формы %>

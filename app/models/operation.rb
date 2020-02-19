@@ -26,17 +26,25 @@ class Operation < ApplicationRecord
   end)
   scope :daily_expenses, (lambda do |budget|
     where(budget: budget)
-      .where(operation_type: 'expense')
+      .where(operation_type: :expense)
       .select(:date, :amount)
       .group(:date)
       .sum(:amount)
   end)
-  scope :amount_of_income, ->(budget) { where(budget: budget).where(operation_type: 'income').sum(:amount) }
+  scope :amount_of_income, ->(budget) { where(budget: budget).where(operation_type: :income).sum(:amount) }
   scope :grouped_by_categories_amount, ->(budget) { select(:category, :amount).where(budget: budget).group(:category).sum(:amount) }
 
   before_validation :set_operation_type!
 
-  PaymentMethodOperation = Struct.new(:payment_method, :operation_type, :amount)
+  Payment = Struct.new(:payment_method, :operation_type, :amount) do
+    def expense?
+      operation_type == 'expense'
+    end
+
+    def income?
+      operation_type == 'income'
+    end
+  end
 
   def self.grouped_by_payment_method_amount(budget)
     relation = select(:payment_method_id, :operation_type, :amount)
@@ -54,7 +62,7 @@ class Operation < ApplicationRecord
       type = key.last
       amount = value
 
-      acc << PaymentMethodOperation.new(payment_method, type, amount)
+      acc << Payment.new(payment_method, type, amount)
       acc
     end
   end

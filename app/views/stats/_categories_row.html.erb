@@ -1,8 +1,8 @@
 <% category = categories_row.first %>
 <% expenses = categories_row.last %>
-<% symbol = "-" if category.operation_type == 'expense' %>
-<% symbol = "+" if category.operation_type == 'income' %>
-<% class_row = category.operation_type == 'expense' ? 'text-danger' : 'text-success'  %>
+<% symbol = "-" if category.expense? %>
+<% symbol = "+" if category.income? %>
+<% class_row = category.expense? ? 'text-danger' : 'text-success'  %>
 
 <tr>
   <td scope="row"><%= category %></td>
