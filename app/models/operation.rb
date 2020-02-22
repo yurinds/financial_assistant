@@ -81,6 +81,8 @@ class Operation < ApplicationRecord
   end
 
   def set_operation_type!
+    return unless category
+
     self.operation_type = category.operation_type
   end
 end

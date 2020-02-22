@@ -1,9 +1,5 @@
-<%= render partial: 'partials/flash', object: @operation, as: 'resource' %>
+<%= render partial: 'partials/flash', object: @operations_facade.operation, as: 'resource' %>
 
-$("#collapseExample .card-body").html("<%= j(render partial: 'operations/form', 
-                                            locals: {budget: @budget, 
-                                                    operation: @operation, 
-                                                    categories: @categories,
-                                                    payment_methods: @payment_methods}) %>");
+$("#collapseExample .card-body").html("<%= j(render partial: 'operations/form', object: @operations_facade, as: 'operations_facade' ) %>");
 
 $("#collapseExample").collapse('show');

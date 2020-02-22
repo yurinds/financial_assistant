@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
 class OperationsController < ApplicationController
-  before_action :find_operation, only: %i[edit update destroy]
-  before_action :find_budget
-  before_action :find_categories, only: %i[create update new edit]
-  before_action :find_payment_methods, only: %i[create update new edit]
-
   def new
-    @operation = @budget.operations.build
+    operation = operations_facade.new_operation
 
     respond_to do |format|
       format.js { render :new }
@@ -15,7 +10,7 @@ class OperationsController < ApplicationController
   end
 
   def edit
-    authorize @operation
+    authorize operations_facade.operation
 
     respond_to do |format|
       format.js { render :new }
@@ -23,30 +18,30 @@ class OperationsController < ApplicationController
   end
 
   def create
-    @operation = @budget.operations.build(allowed_params)
+    operation = operations_facade.new_operation(allowed_params)
 
-    if @operation.save
-      redirect_to @budget, notice: t('.success')
+    if operation.save
+      redirect_to operations_facade.budget, notice: t('.success')
     else
       render_error_messages_by_js
     end
   end
 
   def update
-    authorize @operation
+    authorize operations_facade.operation
 
-    if @operation.update_attributes(allowed_params)
-      redirect_to @budget, notice: t('.success')
+    if operations_facade.operation.update_attributes(allowed_params)
+      redirect_to operations_facade.budget, notice: t('.success')
     else
       render_error_messages_by_js
     end
   end
 
   def destroy
-    authorize @operation
+    authorize operations_facade.operation
 
-    if @operation.destroy
-      redirect_to @budget, notice: t('.success')
+    if operations_facade.operation.destroy
+      redirect_to operations_facade.budget, notice: t('.success')
     else
       render_error_messages_by_js
     end
@@ -56,24 +51,12 @@ class OperationsController < ApplicationController
 
   def render_error_messages_by_js
     respond_to do |format|
-      format.js { render partial: 'partials/flash', object: @operation, as: 'resource' }
+      format.js { render partial: 'partials/flash', object: operations_facade.operation, as: 'resource' }
     end
   end
 
-  def find_categories
-    @categories = Category.by_user(current_user)
-  end
-
-  def find_payment_methods
-    @payment_methods = PaymentMethod.by_user(current_user)
-  end
-
-  def find_operation
-    @operation = Operation.find(params[:id])
-  end
-
-  def find_budget
-    @budget = Budget.find(params[:budget_id])
+  def operations_facade
+    @operations_facade ||= OperationsFacade.new(current_user, params)
   end
 
   def allowed_params
