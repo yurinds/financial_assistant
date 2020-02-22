@@ -1,5 +1,5 @@
-<% category = categories_row.first %>
-<% expenses = categories_row.last %>
+<% category = categories.first %>
+<% expenses = categories.last %>
 <% symbol = "-" if category.expense? %>
 <% symbol = "+" if category.income? %>
 <% class_row = category.expense? ? 'text-danger' : 'text-success'  %>

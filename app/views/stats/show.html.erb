@@ -1,4 +1,4 @@
-<%= collection_select(:budget, :budget_id, @budgets, :id, :to_s, { prompt: true, selected: @current_budget }, class: "custom-select mt-3", data: {url: stats_path}) %>
+<%= collection_select(:budget, :budget_id, @stats_facade.budgets, :id, :to_s, { prompt: true, selected: @stats_facade.current_budget }, class: "custom-select mt-3", data: {url: stats_path}) %>
 
 <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
   <li class="nav-item">
@@ -45,7 +45,7 @@
         </tr>
       </thead>
       <tbody>
-        <%= render partial: 'daily_analytics_row', collection: @daily_analytics %>
+        <%= render partial: 'daily_analytics_row', collection: @stats_facade.daily_analytics, as: 'daily_analytics' %>
       </tbody>
     </table>
   </div>
@@ -59,7 +59,7 @@
         </tr>
       </thead>
       <tbody>
-        <%= render partial: 'categories_row', collection: @categories %>
+        <%= render partial: 'categories_row', collection: @stats_facade.categories, as: 'categories' %>
       </tbody>
     </table>
   </div>
@@ -73,7 +73,7 @@
         </tr>
       </thead>
       <tbody>
-        <%= render partial: 'payment_methods_row', collection: @payment_methods %>
+        <%= render partial: 'payment_methods_row', collection: @stats_facade.payment_methods, as: 'payment_methods' %>
       </tbody>
     </table>
   </div>
