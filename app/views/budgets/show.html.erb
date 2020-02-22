@@ -1,14 +1,14 @@
 <%# Список бюджетов %>
 
 <div class="owl-carousel owl-theme text-center">
-  <%= render partial: "budget", collection: @budgets, locals: {current_budget: @budget} %>
+  <%= render partial: "budget", collection: @budgets_facade.budgets, locals: {current_budget: @budgets_facade.budget} %>
 </div>
 
 <div class="row align-items-start">
 
   <%# Таблица всех операций %>
   <div class="col-md-12 col-lg-8">
-    <% unless @operations.empty? %>
+    <% unless @budgets_facade.operations.empty? %>
       <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -20,7 +20,7 @@
           </tr>
         </thead>
         <tbody>
-          <%= render partial: "operations/operation", collection: @operations, locals: { budget: @budget } %>
+          <%= render partial: "operations/operation", collection: @budgets_facade.operations, locals: { budget: @budgets_facade.budget } %>
         </tbody>
       </table>
     <% end %>
@@ -32,7 +32,7 @@
       <div class="card">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
-            <%= link_to t('.btn_new_operation'), new_budget_operation_path(@budget, @operation), 
+            <%= link_to t('.btn_new_operation'), new_budget_operation_path(@budgets_facade.budget, @budgets_facade.operation), 
                 remote: true, class: "btn btn-link", 
                 data: {toggle: "collapse", target: "#collapseExample" }, 
                 aria: {expanded: "false", controls: "collapseExample"} %>

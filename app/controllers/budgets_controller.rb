@@ -1,50 +1,40 @@
 # frozen_string_literal: true
 
 class BudgetsController < ApplicationController
-  before_action :find_budgets_by_user, only: %i[index show]
-  before_action :find_budget, only: %i[edit update destroy show]
+  before_action :budgets_facade, only: [:new]
 
-  def new
-    @new_budget = current_user.budgets.build
-  end
+  def new; end
 
   def create
-    @budget = current_user.budgets.build(allowed_params)
+    budget = budgets_facade.new_budget(allowed_params)
 
-    if @budget.save
-      redirect_to @budget, notice: t('.created')
+    if budget.save
+      redirect_to budget, notice: t('.created')
     else
       render_error_messages_by_js
     end
   end
 
   def index
-    @current_budget = @budgets.first
-
-    if @current_budget
-      redirect_to @current_budget
+    if budgets_facade.first_user_budget
+      redirect_to budgets_facade.first_user_budget
     else
       redirect_to new_budget_path
     end
   end
 
   def show
-    authorize @budget
-
-    @operations = Operation.all_by_budget(@budget)
-    @operation = @budget.operations.build
-    @categories = Category.by_user(current_user)
-    @payment_methods = PaymentMethod.by_user(current_user)
+    authorize budgets_facade.budget
   end
 
   def edit
-    authorize @budget
+    authorize budgets_facade.budget
   end
 
   def update
-    authorize @budget
+    authorize budgets_facade.budget
 
-    if @budget.update_attributes(allowed_params)
+    if budgets_facade.budget.update_attributes(allowed_params)
       redirect_to categories_path, notice: t('.success')
     else
       render_error_messages_by_js
@@ -52,9 +42,9 @@ class BudgetsController < ApplicationController
   end
 
   def destroy
-    authorize @budget
+    authorize budgets_facade.budget
 
-    if @budget.destroy
+    if budgets_facade.budget.destroy
       redirect_to budgets_path, notice: t('.success')
     else
       render_error_messages_by_js
@@ -65,16 +55,20 @@ class BudgetsController < ApplicationController
 
   def render_error_messages_by_js
     respond_to do |format|
-      format.js { render partial: 'partials/flash', object: @budget, as: 'resource' }
+      format.js { render partial: 'partials/flash', object: budget, as: 'resource' }
     end
   end
 
-  def find_budgets_by_user
-    @budgets = Budget.all_by_user(current_user)
+  def budget
+    params[:id] ? set_budget : nil
   end
 
-  def find_budget
-    @budget = Budget.find(params[:id])
+  def budgets_facade
+    @budgets_facade ||= BudgetsFacade.new(current_user, budget)
+  end
+
+  def set_budget
+    @_budget ||= Budget.find(params[:id])
   end
 
   def allowed_params
