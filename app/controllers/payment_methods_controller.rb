@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 class PaymentMethodsController < ApplicationController
-  before_action :find_payment_method, except: %i[index new create]
-  before_action :find_payment_methods_by_user, only: %i[index create]
-  before_action :build_payment_method, only: %i[index new]
+  before_action :payment_methods_facade, only: %i[index new]
 
   def index; end
 
@@ -14,7 +12,7 @@ class PaymentMethodsController < ApplicationController
   end
 
   def edit
-    authorize @payment_method
+    authorize payment_methods_facade.payment_method
 
     respond_to do |format|
       format.js { render :form }
@@ -22,9 +20,9 @@ class PaymentMethodsController < ApplicationController
   end
 
   def create
-    @payment_method = current_user.payment_methods.build(allowed_params)
+    payment_method = payment_methods_facade.new_payment_method(allowed_params)
 
-    if @payment_method.save
+    if payment_method.save
       redirect_to payment_methods_path, notice: t('.success')
     else
       render_error_messages_by_js
@@ -32,9 +30,11 @@ class PaymentMethodsController < ApplicationController
   end
 
   def update
-    authorize @payment_method
+    payment_method = payment_methods_facade.payment_method
 
-    if @payment_method.update_attributes(allowed_params)
+    authorize payment_method
+
+    if payment_method.update_attributes(allowed_params)
       redirect_to payment_methods_path, notice: t('.success')
     else
       render_error_messages_by_js
@@ -42,9 +42,9 @@ class PaymentMethodsController < ApplicationController
   end
 
   def destroy
-    authorize @payment_method
+    authorize payment_methods_facade.payment_method
 
-    if @payment_method.destroy
+    if @payment_methods_facade.payment_method.destroy
       redirect_to payment_methods_path, notice: t('.success')
     else
       render_error_messages_by_js
@@ -55,23 +55,15 @@ class PaymentMethodsController < ApplicationController
 
   def render_error_messages_by_js
     respond_to do |format|
-      format.js { render partial: 'partials/flash', object: @payment_method, as: 'resource' }
+      format.js { render partial: 'partials/flash', object: payment_methods_facade.payment_method, as: 'resource' }
     end
   end
 
-  def find_payment_methods_by_user
-    @payment_methods = PaymentMethod.by_user(current_user)
+  def payment_methods_facade
+    @payment_methods_facade ||= PaymentMethodFacade.new(current_user, params)
   end
 
   def allowed_params
     params.require(:payment_method).permit(:name, :is_cash)
-  end
-
-  def find_payment_method
-    @payment_method = PaymentMethod.find(params[:id])
-  end
-
-  def build_payment_method
-    @payment_method = current_user.payment_methods.build
   end
 end
