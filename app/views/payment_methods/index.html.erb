@@ -6,11 +6,11 @@
       </div>
 
       <%# Таблица всех операций %>
-      <% unless @payment_methods.empty? %>
+      <% unless @payment_methods_facade.payment_methods.empty? %>
         <div class="card-body">
           <table class="table mt-4">
             <tbody>
-              <%= render partial: "payment_methods/payment_method", collection: @payment_methods %>
+              <%= render partial: "payment_methods/payment_method", collection: @payment_methods_facade.payment_methods %>
             </tbody>
           </table>
         </div>
@@ -20,6 +20,6 @@
   </div>
 
   <div class="col-md-12 col-lg-6 form">
-    <%= render partial: "payment_methods/form",  object: @card, as: 'card' %>
+    <%= render partial: "payment_methods/form",  object: @payment_methods_facade, as: 'payment_methods_facade' %>
   </div>
 </div>

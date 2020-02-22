@@ -1,23 +1,23 @@
-<%= form_with(model: [budget, operation], html: {name: 'operationForm'}) do |f| %>
+<%= form_with(model: [operations_facade.budget, operations_facade.operation], html: {name: 'operationForm'}) do |f| %>
   <%# Дата операции %>
   <div class="form-group">
     <%= label_tag('inputDate', t('.date'), class: 'font-weight-bold') %>
     <%= f.date_field :date, autofocus: true, 
-                              class: "form-control", 
-                              id:"inputDate", 
-                              placeholder:t('.date') %>
+                            class: "form-control", 
+                            id:"inputDate", 
+                            placeholder:t('.date') %>
   </div>
 
   <%# Категория %>
   <div class="form-group">
     <%= label_tag('operation_category_id', t('.category'), class: 'font-weight-bold') %>
-    <%= f.collection_select(:category_id, categories, :id, :name, {prompt: true,}, { placeholder: t('.category'), class: 'custom-select' }) %>
+    <%= f.collection_select(:category_id, operations_facade.categories, :id, :name, { prompt: true }, { placeholder: t('.category'), class: 'custom-select' }) %>
   </div>
 
   <%# Способ оплаты %>
   <div class="form-group">
     <%= label_tag('operation_payment_method_id', t('.payment_method'), class: 'font-weight-bold') %>
-    <%= f.collection_select(:payment_method_id, payment_methods, :id, :name, {prompt: true,}, { placeholder: t('.payment_method'), class: 'custom-select' }) %>
+    <%= f.collection_select(:payment_method_id, operations_facade.payment_methods, :id, :name, { prompt: true }, { placeholder: t('.payment_method'), class: 'custom-select' }) %>
   </div>
 
   <%# Описание %>
@@ -32,17 +32,17 @@
   <div class="form-group">
     <%= label_tag('inputAmount', t('.amount'), class: 'font-weight-bold') %>
     <%= f.text_field :amount, class: "form-control", 
-                                id: "inputAmount",
-                                placeholder: t('.amount') %>
+                              id: "inputAmount",
+                              placeholder: t('.amount') %>
   </div>
 
   <%# Отправка формы %>
   <div class="actions">
     <%= f.submit t('.send'), class: 'btn btn-primary mb-2' %>
 
-    <% if operation.persisted? %>
+    <% if operations_facade.operation.persisted? %>
 
-      <%= link_to t('.close'), new_budget_operation_path(@budget), 
+      <%= link_to t('.close'), new_budget_operation_path(operations_facade.budget), 
                 remote: true, class: "btn btn-danger ml-2 mb-2" %>
 
     <% end %>

@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 class CategoriesController < ApplicationController
-  before_action :find_category, except: %i[index new create]
-  before_action :find_categories_by_user, only: %i[index create]
-  before_action :build_category, only: %i[index new]
+  before_action :categories_facade, only: %i[index new]
 
   def index; end
 
@@ -14,7 +12,7 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    authorize @category
+    authorize categories_facade.category
 
     respond_to do |format|
       format.js { render :form }
@@ -22,9 +20,9 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = current_user.categories.build(allowed_params)
+    category = categories_facade.new_category(allowed_params)
 
-    if @category.save
+    if category.save
       redirect_to categories_path, notice: t('.success')
     else
       render_error_messages_by_js
@@ -32,9 +30,9 @@ class CategoriesController < ApplicationController
   end
 
   def update
-    authorize @category
+    authorize categories_facade.category
 
-    if @category.update_attributes(allowed_params)
+    if categories_facade.category.update_attributes(allowed_params)
       redirect_to categories_path, notice: t('.success')
     else
       render_error_messages_by_js
@@ -42,36 +40,28 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    authorize @category
+    authorize categories_facade.category
 
-    if @category.destroy
+    if categories_facade.category.destroy
       redirect_to categories_path, notice: t('.success')
     else
       render_error_messages_by_js
-        end
+    end
   end
 
   private
 
-  def render_error_messages_by_js
-    respond_to do |format|
-      format.js { render partial: 'partials/flash', object: @category, as: 'resource' }
-    end
+  def categories_facade
+    @categories_facade ||= CategoriesFacade.new(current_user, params)
   end
 
-  def find_categories_by_user
-    @categories = Category.by_user(current_user)
+  def render_error_messages_by_js
+    respond_to do |format|
+      format.js { render partial: 'partials/flash', object: categories_facade.category, as: 'resource' }
+    end
   end
 
   def allowed_params
     params.require(:category).permit(:name, :operation_type)
-  end
-
-  def find_category
-    @category = Category.find(params[:id])
-  end
-
-  def build_category
-    @category = current_user.categories.build
   end
 end

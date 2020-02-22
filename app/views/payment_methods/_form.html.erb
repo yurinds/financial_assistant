@@ -1,7 +1,7 @@
 <div class="card mt-3 card-form">
   <div class="card-header">
 
-    <% if @payment_method.persisted? %>
+    <% if payment_methods_facade.payment_method.persisted? %>
       <span class="d-flex">
         <h3><%= t('.edit_payment_method') %></h3>
         <%=link_to fa_icon('window-close'), new_payment_method_path, remote: true, class: "ml-auto align-self-center" %>
@@ -15,7 +15,7 @@
 
   <div class="card-body">
 
-    <%= form_with(model: @payment_method) do |f| %>
+    <%= form_with(model: payment_methods_facade.payment_method) do |f| %>
       <%# Наименование %>
       <div class="form-group">
         <%= label_tag('inputName', t('.name'), class: 'font-weight-bold') %>

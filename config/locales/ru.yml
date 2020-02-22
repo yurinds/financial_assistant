@@ -192,6 +192,7 @@ ru:
         date: 'Дата'
         operation_type: 'Тип'
         description: 'Описание'
+        category: 'Категория'
         amount: 'Сумма'
       user:
         email: 'Электронная почта'

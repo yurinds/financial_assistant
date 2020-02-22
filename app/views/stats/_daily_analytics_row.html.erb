@@ -1,7 +1,7 @@
-<% date = daily_analytics_row[:date] %>
-<% expenses = daily_analytics_row[:expenses] %>
-<% amount = daily_analytics_row[:amount] %>
-<% balance = daily_analytics_row[:balance] %>
+<% date = daily_analytics[:date] %>
+<% expenses = daily_analytics[:expenses] %>
+<% amount = daily_analytics[:amount] %>
+<% balance = daily_analytics[:balance] %>
 <% class_amount = amount.positive? ? 'text-success font-weight-bold' : 'text-danger font-weight-bold'  %>
 <% class_balance = balance.positive? ? 'text-success' : 'text-danger'  %>
 
