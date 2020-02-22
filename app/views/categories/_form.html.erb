@@ -1,7 +1,7 @@
 <div class="card mt-3 card-form">
   <div class="card-header">
 
-    <% if @category.persisted? %>
+    <% if resource.category.persisted? %>
       <span class="d-flex">
         <h3><%= t('.edit_category') %></h3>
         <%=link_to fa_icon('window-close'), new_category_path, remote: true, class: "ml-auto align-self-center" %>
@@ -15,7 +15,7 @@
 
   <div class="card-body">
 
-    <%= form_with(model: @category) do |f| %>
+    <%= form_with(model: resource.category) do |f| %>
       <%# Дата операции %>
       <div class="form-group">
         <%= label_tag('inputName', t('.name'), class: 'font-weight-bold') %>
@@ -26,7 +26,7 @@
       <%# Тип операции %>
       <div class="form-group">
         <%= label_tag('category_operation_type', t('.type'), class: 'font-weight-bold') %>
-        <% selected =  @category.operation_type || '' %>
+        <% selected =  resource.category.operation_type || '' %>
         <%= f.select(:operation_type, options_for_select(operation_types, selected), {prompt: true}, { placeholder: t('.type'), class: 'custom-select', selected: '0' }) %>
       </div>
 

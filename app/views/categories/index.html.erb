@@ -7,10 +7,10 @@
 
       <div class="card-body">
         <%# Таблица всех операций %>
-        <% unless @categories.empty? %>
+        <% unless @categories_facade.categories.empty? %>
           <table class="table mt-4">
             <tbody>
-              <%= render partial: "categories/category", collection: @categories %>
+              <%= render partial: "categories/category", collection: @categories_facade.categories %>
             </tbody>
           </table>
         <% end %>
@@ -20,6 +20,6 @@
   </div>
 
   <div class="col-md-12 col-lg-6 form">
-    <%= render partial: "categories/form",  locals: {category: @category}%>
+    <%= render partial: "categories/form",  object: @categories_facade, as: 'resource'%>
   </div>
 </div>
