@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :payment_method do
     user
-    name { Faker::Lorem.word }
+    name { Faker::Name.last_name }
   end
 end

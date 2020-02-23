@@ -8,7 +8,6 @@ FactoryBot.define do
     operation_type { category.operation_type }
     date { budget.date_from }
     amount { rand(10_000) }
-    username { Faker::Name.name }
-    description { Faker::Lorem.sentence(word_count: 5) }
+    description { Faker::Name.name_with_middle }
   end
 end
