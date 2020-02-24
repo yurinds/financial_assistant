@@ -73,6 +73,8 @@ class Operation < ApplicationRecord
   end
 
   def operation_date_should_correspond_to_budget_period
+    return unless budget
+
     budget_period = (budget.date_from..budget.date_to)
 
     return if budget_period.include?(date)
