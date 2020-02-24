@@ -13,7 +13,7 @@ class PaymentMethod < ApplicationRecord
   def check_for_dependent_operations
     return true if Operation.count_by_payment_method(self) == 0
 
-    errors[:base] << I18n.t('.payment_method.payment_method_dependencies_error')
+    errors[:base] << I18n.t('.payment_method.dependencies_error')
     throw :abort
   end
 
