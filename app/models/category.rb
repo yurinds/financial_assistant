@@ -16,7 +16,7 @@ class Category < ApplicationRecord
   def check_for_dependent_operations
     return true if Operation.count_by_category(self) == 0
 
-    errors[:base] << I18n.t('.category.category_dependencies_error')
+    errors[:base] << I18n.t('.category.dependencies_error')
     throw :abort
   end
 

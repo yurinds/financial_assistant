@@ -104,7 +104,7 @@ class Budget < ApplicationRecord
   end
 
   def set_period
-    return if date_from
+    return if date_from || date_to
 
     return if date.empty?
 

@@ -110,7 +110,7 @@ ru:
       error: 'Ошибка при удалении способа оплаты!'
 
   payment_method:
-    payment_method_dependencies_error: 'К данной карте есть привязанные операции! Удаление невозможно!'
+    dependencies_error: 'К данной карте есть привязанные операции! Удаление невозможно!'
 
   operations:
     form:
@@ -166,7 +166,7 @@ ru:
       error: 'Ошибка при удалении категории!'
 
   category:
-    category_dependencies_error: 'По данной категории существуют операции! Удаление невозможно!'
+    dependencies_error: 'По данной категории существуют операции! Удаление невозможно!'
 
   activerecord:
     models:
