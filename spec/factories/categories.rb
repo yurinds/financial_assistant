@@ -4,6 +4,12 @@ FactoryBot.define do
   factory :category do
     user
     name { Faker::Name.middle_name }
-    operation_type { %w[income expense].sample }
+
+    factory :category_income do
+      operation_type { 'income' }
+    end
+    factory :category_expense do
+      operation_type { 'expense' }
+    end
   end
 end

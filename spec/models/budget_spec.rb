@@ -51,4 +51,58 @@ RSpec.describe Budget, type: :model do
       expect(budget.date_to).to eq date.end_of_month
     end
   end
+
+  describe '#operations_amount' do
+    context 'when operations list is empty' do
+      let(:budget) { create(:budget) }
+
+      it 'returns 0' do
+        amount_income = budget.operations_amount('income')
+        expect(amount_income).to eq 0
+      end
+      it 'returns 0' do
+        amount_expense = budget.operations_amount('expense')
+        expect(amount_expense).to eq 0
+      end
+    end
+
+    context 'when operations list have only expense' do
+      let(:budget) { create(:budget_with_expenses) }
+
+      it 'returns 0' do
+        amount_income = budget.operations_amount('income')
+        expect(amount_income).to eq 0
+      end
+      it 'returns 5000' do
+        amount_expense = budget.operations_amount('expense')
+        expect(amount_expense).to eq 5000
+      end
+    end
+
+    context 'when operations list have only income' do
+      let(:budget) { create(:budget_with_incomes) }
+
+      it 'returns 5000' do
+        amount_income = budget.operations_amount('income')
+        expect(amount_income).to eq 5000
+      end
+      it 'returns 0' do
+        amount_expense = budget.operations_amount('expense')
+        expect(amount_expense).to eq 0
+      end
+    end
+
+    context 'when operations list have expense and income' do
+      let(:budget) { create(:budget_with_operations) }
+
+      it 'returns 5000' do
+        amount_income = budget.operations_amount('income')
+        expect(amount_income).to eq 5000
+      end
+      it 'returns 5000' do
+        amount_expense = budget.operations_amount('expense')
+        expect(amount_expense).to eq 5000
+      end
+    end
+  end
 end
