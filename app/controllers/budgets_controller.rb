@@ -35,7 +35,7 @@ class BudgetsController < ApplicationController
     authorize budgets_facade.budget
 
     if budgets_facade.budget.update_attributes(allowed_params)
-      redirect_to categories_path, notice: t('.success')
+      redirect_to budget_path(budgets_facade.budget), notice: t('.success')
     else
       render_error_messages_by_js
     end

@@ -3,7 +3,6 @@
 FactoryBot.define do
   factory :budget do
     user
-    sequence(:date) { |n| (Date.current - n.month).to_s }
     sequence(:date_from) { |n| (Date.current - n.month).beginning_of_month }
     sequence(:date_to) { |n| (Date.current - n.month).end_of_month }
   end

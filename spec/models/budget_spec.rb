@@ -39,12 +39,12 @@ RSpec.describe Budget, type: :model do
     let(:budget) { build(:budget, date_from: nil, date_to: nil) }
 
     it 'set date_from and date_to' do
-      current_date = budget.date
-      date = Date.parse(current_date)
+      date = (Date.current - 1.month).beginning_of_month
 
       expect(budget.date_from).to eq nil
       expect(budget.date_to).to eq nil
 
+      budget.date = date.to_s
       budget.valid?
 
       expect(budget.date_from).to eq date.beginning_of_month

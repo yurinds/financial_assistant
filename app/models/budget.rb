@@ -104,9 +104,7 @@ class Budget < ApplicationRecord
   end
 
   def set_period
-    return if date_from || date_to
-
-    return if date.empty?
+    return if empty_date?
 
     new_date = save_parse_date
 
@@ -131,5 +129,9 @@ class Budget < ApplicationRecord
     Date.parse(date)
   rescue ArgumentError
     nil
+  end
+
+  def empty_date?
+    date.nil? || date.empty?
   end
 end
