@@ -366,7 +366,7 @@ RSpec.describe BudgetsController, type: :controller do
           expect(flash[:notice]).to be_truthy
         end
 
-        it 'creates new budget and redirect to budgets' do
+        it 'destroy budget and redirect to budgets' do
           expect(response).to redirect_to(budgets_path)
         end
       end
