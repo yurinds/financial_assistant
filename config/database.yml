@@ -7,16 +7,16 @@ development:
   <<: *default
   database: my_financial_assistant_development
 
-  username: <%= Rails.application.credentials.database[:pg_dev_user] if Rails.application.credentials.database %>
-  password: <%= Rails.application.credentials.database[:pg_dev_pass] if Rails.application.credentials.database %>
+  username: <%= Rails.application.credentials.dig(:database, :pg_dev_user) %>
+  password: <%= Rails.application.credentials.dig(:database, :pg_dev_pass) %>
   host: localhost
 
 test:
   <<: *default
   database: my_financial_assistant_test
 
-  username: <%= Rails.application.credentials.database[:pg_dev_user] if Rails.application.credentials.database %>
-  password: <%= Rails.application.credentials.database[:pg_dev_pass] if Rails.application.credentials.database %>
+  username: <%= Rails.application.credentials.dig(:database, :pg_dev_user) %>
+  password: <%= Rails.application.credentials.dig(:database, :pg_dev_pass) %>
   host: localhost
 
 production:
