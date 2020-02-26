@@ -2,6 +2,16 @@
 
 В этом приложении вы можете отслеживать все свои доходы и расходы за месяц.
 
+## Пробная версия приложения доступна на [Heroku](https://fin-assistant.herokuapp.com)
+
+логин: example_user@example.ru
+
+пароль: 123456
+
+---
+
+## Для разворачивания приложения локально, требуется выполнить следующие шаги:
+
 Требуемая версия Ruby и Rails:
 
 ```
@@ -28,25 +38,48 @@ git clone git@github.com:yurinds/financial_assistant.git
 cd financial_assistant
 ```
 
-3. Установите все зависимости:
+3. Установите базу данных PostgreSQL
+
+4. Сгенерируйте `master.key`
+
+```
+EDITOR=vim rails credentials:edit
+```
+
+5. В открывшейся области добавьте ключи:
+
+```yaml
+secret_key_base: ......
+database:
+  pg_dev_user: ваши значения
+  pg_dev_pass: ваши значения
+```
+
+6. Установите все зависимости:
 
 ```
 bundle install
 ```
 
-4. Выполните миграции БД:
+7. Выполните миграции БД:
 
 ```
 bundle exec rails db:migrate
 ```
 
-5. Запустите сервер приложения:
+7. Заполните базу тестовыми данными:
+
+```
+bundle exec rails db:seed
+```
+
+8. Запустите сервер приложения:
 
 ```
 bundle exec rails s
 ```
 
-6. Откройте в браузере:
+9. Откройте в браузере:
 
 ```
 http://localhost:3000
