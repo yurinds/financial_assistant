@@ -4,7 +4,7 @@
   <%= render partial: "budget", collection: @budgets_facade.budgets, locals: {current_budget: @budgets_facade.budget} %>
 </div>
 
-<div class="row align-items-start">
+<div class="flex-column-reverse flex-lg-row row align-items-start">
 
   <%# Таблица всех операций %>
   <div class="col-md-12 col-lg-8">
@@ -27,7 +27,7 @@
   </div>
 
   <%# Выпадающая форма с добавлением операции %>
-  <div class="col-md-12 col-lg-4">
+  <div class="col-md-12 col-lg-4 mb-3">
     <div class="accordion" id="accordionExample">
       <div class="card">
         <div class="card-header" id="headingOne">
@@ -39,6 +39,9 @@
           </h5>
         </div>
       </div>
+      <div class="card">
+      </div>
+
     </div>
   </div>
 
