@@ -13,7 +13,7 @@ class Operation < ApplicationRecord
 
   enum operation_type: %i[expense income]
 
-  scope :all_by_budget, ->(budget) { where(budget: budget).includes(:category, :payment_method).order(:date).order('categories.name') }
+  scope :all_by_budget, ->(budget) { where(budget: budget).includes(:category, :payment_method).order(date: :desc).order('categories.name') }
   scope :count_by_budget, ->(budget) { where(budget: budget).count }
   scope :count_by_category, ->(category) { where(category: category).count }
   scope :count_by_payment_method, ->(payment_method) { where(payment_method: payment_method).count }
@@ -32,7 +32,14 @@ class Operation < ApplicationRecord
       .sum(:amount)
   end)
   scope :amount_of_income, ->(budget) { where(budget: budget).where(operation_type: :income).sum(:amount) }
-  scope :grouped_by_categories_amount, ->(budget) { select(:category, :amount).where(budget: budget).group(:category).sum(:amount) }
+  scope :grouped_by_categories_amount, (lambda { |budget|
+                                          select(:category, :amount)
+                                            .where(budget: budget)
+                                            .group(:category)
+                                            .sum(:amount)
+                                            .sort_by(&:last)
+                                            .to_h
+                                        })
 
   before_validation :set_operation_type!
 
@@ -51,6 +58,8 @@ class Operation < ApplicationRecord
                .where(budget: budget)
                .group(:payment_method_id, :operation_type)
                .sum(:amount)
+               .sort_by(&:last)
+               .to_h
 
     payment_method_ids = relation.keys.map(&:first).reject(&:nil?)
     payment_methods = PaymentMethod.find(payment_method_ids)
