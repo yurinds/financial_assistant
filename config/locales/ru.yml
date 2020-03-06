@@ -1,6 +1,8 @@
 ru:
   layouts:
     app_name: 'Финансовый помощник'
+    app_description: 'Приложение для контроля ваших финансов'
+    author: 'Автор'
     stats: 'Статистика'
     categories: 'Категории'
     create_budget: 'Создать бюджет'
