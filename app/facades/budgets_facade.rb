@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class BudgetsFacade
-  attr_reader :user, :budget
+  attr_reader :user, :budget, :page
 
-  def initialize(user, budget)
+  def initialize(user, budget, page)
     @user = user
     @budget = budget
+    @page = page
   end
 
   def new_budget(allowed_params = {})
@@ -21,7 +22,7 @@ class BudgetsFacade
   end
 
   def operations
-    @operations ||= Operation.all_by_budget(budget)
+    @operations ||= Operation.page(page).per(10).all_by_budget(budget)
   end
 
   def operation

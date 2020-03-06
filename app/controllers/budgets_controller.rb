@@ -64,7 +64,7 @@ class BudgetsController < ApplicationController
   end
 
   def budgets_facade
-    @budgets_facade ||= BudgetsFacade.new(current_user, budget)
+    @budgets_facade ||= BudgetsFacade.new(current_user, budget, params[:page])
   end
 
   def set_budget
