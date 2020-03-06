@@ -23,6 +23,8 @@
           <%= render partial: "operations/operation", collection: @budgets_facade.operations, locals: { budget: @budgets_facade.budget } %>
         </tbody>
       </table>
+
+      <%= paginate @budgets_facade.operations %>
     <% end %>
   </div>
 
