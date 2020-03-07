@@ -13,11 +13,11 @@ class StatsFacade
   end
 
   def current_budget
-    @current_budget ||= Budget.find(params[:id])
+    @current_budget ||= find_budget
   end
 
   def first_user_budget
-    @first_user_budget ||= budgets.first
+    @first_user_budget ||= find_first_budget
   end
 
   def daily_analytics
@@ -30,5 +30,15 @@ class StatsFacade
 
   def payment_methods
     @payment_methods ||= Operation.grouped_by_payment_method_amount(current_budget)
+  end
+
+  private
+
+  def find_budget
+    params[:id] ? Budget.find(params[:id]) : nil
+  end
+
+  def find_first_budget
+    budgets.empty? ? nil : budgets.first
   end
 end
