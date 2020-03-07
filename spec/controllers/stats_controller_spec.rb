@@ -19,14 +19,14 @@ RSpec.describe StatsController, type: :controller do
     end
 
     context 'when authenticated user' do
-      let!(:budget) { create(:budget, user: user) }
-      let!(:another_user_budget) { create(:budget, user: another_user) }
-
       before(:each) do
         sign_in user
       end
 
       context 'when user views his stats' do
+        let!(:budget) { create(:budget, user: user) }
+        before(:each) { get :index }
+
         it 'returns http status redirect' do
           get :index
           expect(response).to have_http_status(:redirect)
@@ -42,6 +42,17 @@ RSpec.describe StatsController, type: :controller do
           stats_facade = assigns(:stats_facade)
 
           expect(stats_facade.budgets).to eq user.budgets
+        end
+      end
+
+      context 'when the user has no budgets' do
+        before(:each) { get :index }
+        it 'returns http status redirect' do
+          expect(response).to have_http_status(:redirect)
+        end
+
+        it 'redirect to new budget' do
+          expect(response).to redirect_to(new_budget_path)
         end
       end
     end
