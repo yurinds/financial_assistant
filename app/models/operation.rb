@@ -41,6 +41,7 @@ class Operation < ApplicationRecord
                                             .to_h
                                         })
 
+  before_validation :set_category_by_mcc, if: :mcc
   before_validation :set_operation_type!
 
   Payment = Struct.new(:payment_method, :operation_type, :amount) do
@@ -95,5 +96,20 @@ class Operation < ApplicationRecord
     return unless category
 
     self.operation_type = category.operation_type
+  end
+
+  def set_category_by_mcc
+    category_name = Settings.mcc[mcc]
+
+    if category_name.nil?
+      errors.add(:mcc, :mcc_undefined)
+      return
+    end
+
+    category = Category.find_or_create_by(user: budget.user, name: category_name) do |item|
+      item.operation_type = 'expense'
+    end
+
+    self.category = category
   end
 end

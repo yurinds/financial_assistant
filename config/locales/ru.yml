@@ -122,6 +122,7 @@ ru:
       payment_method: 'Способ оплаты'
       description: 'Описание'
       amount: 'Сумма'
+      mcc: 'МСС-код'
       send: 'Отправить'
       close: 'Отменить'
 
@@ -171,6 +172,12 @@ ru:
     dependencies_error: 'По данной категории существуют операции! Удаление невозможно!'
 
   activerecord:
+    errors:
+      models:
+        operation:
+          attributes:
+            mcc:
+              mcc_undefined: 'не существует!'
     models:
       budget: 'Бюджет'
       category: 'Категория'
@@ -192,9 +199,10 @@ ru:
 
       operation:
         date: 'Дата'
-        operation_type: 'Тип'
+        operation_type: 'Тип операции'
         description: 'Описание'
         category: 'Категория'
+        mcc: 'МСС-код'
         amount: 'Сумма'
       user:
         email: 'Электронная почта'

@@ -6,7 +6,7 @@ class Category < ApplicationRecord
 
   enum operation_type: %i[expense income]
 
-  validates :name, presence: true, uniqueness: { case_sensitive: false, scope: :user_id }, length: { maximum: 20 }
+  validates :name, presence: true, uniqueness: { case_sensitive: false, scope: :user_id }, length: { maximum: 50 }
   validates :operation_type, presence: true
 
   before_destroy :check_for_dependent_operations

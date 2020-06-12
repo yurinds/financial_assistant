@@ -28,6 +28,14 @@
                                     placeholder: t('.description') %>
   </div>
 
+  <%# Описание %>
+  <div class="form-group">
+    <%= label_tag('inputMcc', t('.mcc'), class: 'font-weight-bold') %>
+    <%= f.text_field :mcc,  class: "form-control", 
+                            id: "inputMcc",
+                            placeholder: t('.mcc') %>
+  </div>
+
   <%# Сумма %>
   <div class="form-group">
     <%= label_tag('inputAmount', t('.amount'), class: 'font-weight-bold') %>

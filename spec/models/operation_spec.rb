@@ -60,6 +60,30 @@ RSpec.describe Operation, type: :model do
     end
   end
 
+  describe '#set_category_by_mcc!' do
+    context 'когда категория пустая, но мсс указан' do
+      let(:operation) { build(:operation, mcc: mcc) }
+
+      context 'когда передан валидный мсс' do
+        let(:mcc) { 4814 }
+
+        it { expect(operation).to be_valid }
+      end
+
+      context 'когда передан не валидный мсс' do
+        let(:mcc) { 1488 }
+
+        it { expect(operation).not_to be_valid }
+      end
+    end
+
+    context 'когда категория и мсс пусты' do
+      let(:operation) { build(:operation, mcc: nil) }
+
+      it { expect(operation).not_to be_valid }
+    end
+  end
+
   describe '.grouped_by_payment_method_amount' do
     let(:user) { create(:user) }
     let(:budget) { create(:budget, user: user) }
@@ -72,7 +96,7 @@ RSpec.describe Operation, type: :model do
     context 'when the budget has no operations' do
       it { expect(Operation.grouped_by_payment_method_amount(budget)).to be_empty }
     end
-    
+
     context 'when the budget has one income operation' do
       it do
         expected = [[operation_income.payment_method, operation_income.operation_type, operation_income.amount]]

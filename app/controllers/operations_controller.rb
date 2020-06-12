@@ -64,6 +64,7 @@ class OperationsController < ApplicationController
                                       :description,
                                       :category_id,
                                       :payment_method_id,
-                                      :amount)
+                                      :amount,
+                                      :mcc)
   end
 end
