@@ -16,6 +16,24 @@ RSpec.describe Operation, type: :model do
 
     it { should define_enum_for(:operation_type) }
     it { should validate_presence_of(:amount) }
+
+    context 'когда указан пустой mcc' do
+      let(:mcc) { '' }
+      before do
+        subject.mcc = mcc
+      end
+
+      it { expect(subject).to be_valid }
+    end
+
+    context 'когда указан пустой mcc - nil' do
+      let(:mcc) { nil }
+      before do
+        subject.mcc = mcc
+      end
+
+      it { expect(subject).to be_valid }
+    end
   end
 
   describe '#operation_date_should_correspond_to_budget_period' do

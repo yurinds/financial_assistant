@@ -41,7 +41,7 @@ class Operation < ApplicationRecord
                                             .to_h
                                         })
 
-  before_validation :set_category_by_mcc, if: :mcc
+  before_validation :set_category_by_mcc, if: :mcc_defined?
   before_validation :set_operation_type!
 
   Payment = Struct.new(:payment_method, :operation_type, :amount) do
@@ -118,5 +118,9 @@ class Operation < ApplicationRecord
       operation = find_or_create_by(item)
       operation.update!(item)
     end
+  end
+
+  def mcc_defined?
+    !mcc.nil? && !mcc.empty?
   end
 end
