@@ -28,10 +28,6 @@ class OperationsFacade
     params[:id] ? set_operation : new_operation
   end
 
-  def budget
-    @budget ||= Budget.find(params[:budget_id])
-  end
-
   private
 
   def set_operation

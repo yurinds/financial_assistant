@@ -3,6 +3,7 @@
 class Budget < ApplicationRecord
   belongs_to :user
   has_many :operations
+  has_many :attachments
 
   validates :date_from, presence: true, uniqueness: { case_sensitive: false, scope: :user_id }
   validates :date_to, presence: true, uniqueness: { case_sensitive: false, scope: :user_id }

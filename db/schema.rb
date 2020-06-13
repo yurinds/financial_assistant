@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_110205) do
+ActiveRecord::Schema.define(version: 2020_06_12_164136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachments", force: :cascade do |t|
+    t.bigint "budget_id"
+    t.string "path"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["budget_id"], name: "index_attachments_on_budget_id"
+  end
 
   create_table "budgets", force: :cascade do |t|
     t.bigint "user_id"
@@ -22,6 +30,8 @@ ActiveRecord::Schema.define(version: 2020_06_12_110205) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "save_percent", default: 0
+    t.bigint "attachment_id"
+    t.index ["attachment_id"], name: "index_budgets_on_attachment_id"
     t.index ["user_id"], name: "index_budgets_on_user_id"
   end
 
@@ -77,6 +87,8 @@ ActiveRecord::Schema.define(version: 2020_06_12_110205) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "attachments", "budgets"
+  add_foreign_key "budgets", "attachments"
   add_foreign_key "budgets", "users"
   add_foreign_key "categories", "users"
   add_foreign_key "operations", "budgets"

@@ -9,7 +9,7 @@ class OperationsCreator
   end
 
   def perform
-    Operation.create!(operations)
+    Operation.update_all_or_create(operations)
   end
 
   private
