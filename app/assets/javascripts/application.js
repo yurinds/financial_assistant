@@ -20,3 +20,7 @@
 //= require bootstrap-datetimepicker
 //= require owl.carousel
 //= require_tree .
+
+document.addEventListener('turbolinks:load', function () {
+  bsCustomFileInput.init();
+});

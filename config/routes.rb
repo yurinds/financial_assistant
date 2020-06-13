@@ -11,5 +11,6 @@ Rails.application.routes.draw do
 
   resources :budgets do
     resources :operations, except: %i[show index]
+    resources :attachments, only: %i[new create]
   end
 end

@@ -12,6 +12,12 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def render_error_messages_by_js(resource)
+    respond_to do |format|
+      format.js { render partial: 'partials/flash', object: resource, as: 'resource' }
+    end
+  end
+
   def user_not_authorized(exception)
     policy_name = exception.policy.class.to_s.underscore
 

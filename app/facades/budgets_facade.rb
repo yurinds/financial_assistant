@@ -29,6 +29,10 @@ class BudgetsFacade
     @operation ||= budget.operations.build
   end
 
+  def attachment
+    @attachment ||= budget.attachments.build
+  end
+
   def categories
     @categories ||= Category.by_user(user)
   end

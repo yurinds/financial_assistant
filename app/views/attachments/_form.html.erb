@@ -1,0 +1,11 @@
+<%= form_with model: [budget, attachment] do |f| %>
+  <div class="input-group">
+    <div class="custom-file">
+      <%= f.file_field :path,  class: "custom-file-input", id: "inputGroupFile", aria: { describedby: "inputGroupFileAddon"} %>
+      <%=label_tag "exampleInputFile", t('.input_file'), data: { browse: t('.browse') }, class: "custom-file-label"%>
+    </div>
+    <div class="input-group-append">
+      <%= f.submit t('.upload'), class: 'btn btn-outline-primary', id:"inputGroupFileAddon" %>
+    </div>
+  </div>
+<% end %>

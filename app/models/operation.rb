@@ -112,4 +112,11 @@ class Operation < ApplicationRecord
 
     self.category = category
   end
+
+  def self.update_all_or_create(attributes)
+    attributes.each do |item|
+      operation = find_or_create_by(item)
+      operation.update!(item)
+    end
+  end
 end

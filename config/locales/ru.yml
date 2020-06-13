@@ -60,6 +60,7 @@ ru:
 
     show:
       btn_new_operation: 'Добавить операцию'
+      btn_new_attachment: 'Добавить выгрузку'
       date: 'Дата'
       operation_type: 'Тип'
       category: 'Категория'
@@ -113,6 +114,15 @@ ru:
 
   payment_method:
     dependencies_error: 'К данной карте есть привязанные операции! Удаление невозможно!'
+
+  attachments:
+    form:
+      input_file: 'Выберите файл'
+      browse: 'Обзор'
+      upload: 'Загрузить'
+
+    create:
+      success: 'Операции успешно созданы!'
 
   operations:
     form:
@@ -196,6 +206,8 @@ ru:
       payment_method:
         name: 'Наименование'
         is_cash: 'Наличный расчет'
+      attachment:
+        path: ''
 
       operation:
         date: 'Дата'
@@ -238,3 +250,7 @@ ru:
       edit?: 'Вы не можете редактировать этот способ оплаты!'
       destroy?: 'Вы не можете удалить этот способ оплаты!'
       update?: 'Вы не можете обновить этот способ оплаты!'
+
+  errors:
+    messages:
+      extension_whitelist_error: 'Допустимы только файлы формата xls/xlsx!'
