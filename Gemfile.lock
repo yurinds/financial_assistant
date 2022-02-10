@@ -231,7 +231,8 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (4.0.6)
-    puma (3.12.6)
+    puma (5.6.1)
+      nio4r (~> 2.0)
     pundit (2.1.1)
       activesupport (>= 3.0.0)
     racc (1.6.0)
@@ -383,7 +384,7 @@ DEPENDENCIES
   owlcarousel-rails
   pg (>= 0.18, < 2.0)
   pry-rails
-  puma (~> 3.12)
+  puma (~> 5.6)
   pundit
   rails (~> 5.2.4, >= 5.2.4.1)
   rails-controller-testing
